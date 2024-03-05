@@ -2,9 +2,10 @@
 
 namespace App\Controller;
 
-use Doctrine\DBAL\Types\TextType;
+use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -27,8 +28,9 @@ class SearchController extends AbstractController
      */
     public function searchBar(): Response {
 
+        
         $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl(('handleSearch')))
+            ->setAction($this->generateUrl('app_handleSearch'))
             ->add('query', TextType::class,
             [
                 'label' => false,
@@ -44,17 +46,35 @@ class SearchController extends AbstractController
                 ]
             ])
             ->getForm();
-        return $this->render('search/index.html.twig',[
-            'form' => $form -> createView()
+        return $this->render('search/search.html.twig',[
+            'form' => $form->createView()
         ]);
     }
 
-    #[Route('/handleSearch', name: "app_handleSearch")]
-    public function handleSearch(Request $request, ArtistRepository $artist, SongRepository $song){
-        $query = $request->request->get('form')['query'];
+    /**
+     * recuperation des données artiste et chanson
+     *
+     * @param Request $request
+     * @param ArtistRepository $artist
+     * @param SongRepository $song
+     * @return void
+     */
+    #[Route('/search/bar/handleSearch', name: "app_handleSearch")]
+    public function handleSearch(Request $request, ArtistRepository $artist) :Response {
+        $query = $request->getContent();
+        parse_str(urldecode($query), $decoded);
+        $queryName = $decoded['form']['query'];
+
         if($query) {
-            $artists = $artist->findArtisteByName($query);
-            $songs = $song->findSongByName($query);
+            $artists = $artist->findArtistByName($queryName);
+            // $songs = $song->findSongByName($query);
+           
         }
+        return $this->render('search/index.html.twig', [
+            'artists' => $artists,
+            // 'songs' => $songs
+        ]);
     }
+
+    
 }
