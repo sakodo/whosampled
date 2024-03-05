@@ -25,6 +25,7 @@ class Sample
     private Collection $songs;
 
 
+
     public function __construct()
     {
         $this->songs = new ArrayCollection();
@@ -82,6 +83,7 @@ class Sample
 
         return $this;
     }
+
 
    
 }

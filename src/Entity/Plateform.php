@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlateformRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlateformRepository::class)]
@@ -18,6 +20,18 @@ class Plateform
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img_plateform_file = null;
+
+    #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'plateforms')]
+    private Collection $songs;
+
+    public function __construct()
+    {
+        $this->songs = new ArrayCollection();
+    }
+
+  
+
+  
 
     public function getId(): ?int
     {
@@ -47,4 +61,30 @@ class Plateform
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Song>
+     */
+    public function getSongs(): Collection
+    {
+        return $this->songs;
+    }
+
+    public function addSong(Song $song): static
+    {
+        if (!$this->songs->contains($song)) {
+            $this->songs->add($song);
+        }
+
+        return $this;
+    }
+
+    public function removeSong(Song $song): static
+    {
+        $this->songs->removeElement($song);
+
+        return $this;
+    }
+
+ 
 }

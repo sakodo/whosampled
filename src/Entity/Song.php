@@ -33,11 +33,15 @@ class Song
     #[ORM\ManyToMany(targetEntity: Sample::class, mappedBy: 'songs')]
     private Collection $samples;
 
+    #[ORM\ManyToMany(targetEntity: Plateform::class, mappedBy: 'songs')]
+    private Collection $plateforms;
+
     public function __construct()
     {
         $this->artists = new ArrayCollection();
         $this->albums = new ArrayCollection();
         $this->samples = new ArrayCollection();
+        $this->plateforms = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -157,6 +161,33 @@ class Song
     {
         if ($this->samples->removeElement($sample)) {
             $sample->removeSong($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Plateform>
+     */
+    public function getPlateforms(): Collection
+    {
+        return $this->plateforms;
+    }
+
+    public function addPlateform(Plateform $plateform): static
+    {
+        if (!$this->plateforms->contains($plateform)) {
+            $this->plateforms->add($plateform);
+            $plateform->addSong($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlateform(Plateform $plateform): static
+    {
+        if ($this->plateforms->removeElement($plateform)) {
+            $plateform->removeSong($this);
         }
 
         return $this;
