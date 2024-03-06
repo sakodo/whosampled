@@ -8,13 +8,95 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/Applications/MAMP/htdocs/whosampled/src/Controller/HomeController.php</code></li>
-        <li>Your template at <code>/Applications/MAMP/htdocs/whosampled/templates/home/index.html.twig</code></li>
-    </ul>
+    <div class='d-flex justify-content-center'>
+        <img src="{{ asset('img/whosampled.png')}}" alt="">
+        </div>
+
+    <ul class="nav nav-pills nav-fill">
+  <li class="nav-item">
+    <a class="nav-link" href="#"><img src="{{ asset('img/home.png')}}" alt=""></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"><img src="{{ asset('img/library.png')}}" alt=""></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"><img src="{{ asset('img/favoris.png')}}" alt=""></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#"><img src="{{ asset('img/search.png')}}" alt=""></a>
+  </li>
+</ul>
+<header>
+    <div id='interview' class='container'>
+    
+    <h2>interview</h2>
+        <div class='row'>
+            <div class='col-6'>
+                <p>Dig deeper into music by discovering direct connections among over 1,046,000 songs and 322,000 artists, from Hip-Hop, Rap and R&B via Electronic / Dance through to Rock, Pop, Soul, Funk, Reggae, Jazz, Classical and beyond.
+                WhoSampled's verified content is built by a community of over 33,000 contributors. Make contributions to earn Cred
+                - our very own points system. Join us now to add more knowledge and share it with the world!</p>
+            </div>
+            <div class='col-6'>
+                <img src="{{ asset('img/home.jpg')}}" alt="">
+            </div>
+        </div>
+    </div>
+</header>
+{# <------------- section Header ------------------> #}
+
+<section class='section-plateform'>
+    <div id='platform' class='container'>
+        <h2>Platform</h2>
+    </div>
+    
+    <div class='container'>   
+        <div class="row">
+            <div class="col">
+                <img src="{{ asset('img/spotify.jpg')}}" alt="" style='height:50px;'>    
+            </div>
+            <div class="col">
+                <img src="{{ asset('img/youtube.png')}}" alt="" style='height:50px;'>    
+            </div>
+            <div class="col">
+                <img src="{{ asset('img/SoundCloud.jpg')}}" alt="" style='height:50px;'>    
+            </div>
+            <div class="col">
+                <img src="{{ asset('img/deezer.png')}}" alt="" style='height:50px;'>    
+            </div>
+        </div>
+    </div>
+</section>
+
+
+    <div id='sample' class='container'>
+        <h2>Weekly Top Sample</h2>
+    
+
+        <div class='container'>
+            <div class='row'>
+                <div class='col-6'>
+                    <img src="{{ asset('img/album.jpg')}}" alt="">
+                    </p>album<p>
+                    <p>kendrick Lamar</p>
+                </div>
+
+                <div class='col-6'>
+                    <img src="{{ asset('img/cover.jpg')}}" alt="">
+                    </p>album<p>
+                    <p>Drake</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    
+        
+
+
+    
+
+   
 </div>
 {% endblock %}
