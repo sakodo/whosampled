@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\SearchTestType;
 use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -13,8 +14,9 @@ use Symfony\Component\Routing\Attribute\Route;
 class SearchController extends AbstractController
 {
     #[Route('/search', name: 'app_search')]
-    public function index(): Response
+    public function index(SearchTestType $form): Response
     {
+        
         return $this->render('search/index.html.twig', [
             'controller_name' => 'SearchController',
         ]);
@@ -52,7 +54,7 @@ class SearchController extends AbstractController
     }
 
     /**
-     * recuperation des données artiste et chanson
+     * Recupération de la recherche de l'utilisateur 
      *
      * @param Request $request
      * @param ArtistRepository $artist
@@ -61,6 +63,7 @@ class SearchController extends AbstractController
      */
     #[Route('/search/bar/handleSearch', name: "app_handleSearch")]
     public function handleSearch(Request $request, ArtistRepository $artist) :Response {
+
         $query = $request->getContent();
         parse_str(urldecode($query), $decoded);
         $queryName = $decoded['form']['query'];
