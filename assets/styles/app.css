@@ -1,6 +1,10 @@
 body {
-    background-color: white;
+    background-color:white;
 }
+#nav {
+  margin-top: 50px;
+}
+
 #interview h2 {
     background: linear-gradient(45deg, #000 12.5%, #E9D051 12.5%, #E9D051 37.5%, #000 37.5%, #000 62.5%, #E9D051 62.5%, #E9D051 87.5%, #000 87.5%);
   background-size: 2px 2px;
