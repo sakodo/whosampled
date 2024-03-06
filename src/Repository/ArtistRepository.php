@@ -24,9 +24,9 @@ class ArtistRepository extends ServiceEntityRepository
     public function findArtistByName(string $query): array
        {
            return $this->createQueryBuilder('a')
-               ->andWhere('a.artist_name = :val')
+               ->andWhere('a.artist_name LIKE :val')
                ->setParameter('val', '%'.$query.'%')
-               ->orderBy('a.id', 'ASC')
+               ->orderBy('a.artist_name', 'ASC')
                ->setMaxResults(10)
                ->getQuery()
                ->getResult()

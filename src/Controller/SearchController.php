@@ -71,7 +71,7 @@ class SearchController extends AbstractController
         if($query) {
             $artists = $artist->findArtistByName($queryName);
             // $songs = $song->findSongByName($query);
-           
+           dd($artists);
         }
         return $this->render('search/index.html.twig', [
             'artists' => $artists,
