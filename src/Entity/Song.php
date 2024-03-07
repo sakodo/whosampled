@@ -120,6 +120,7 @@ class Song
         return $this->albums;
     }
 
+  
     public function addAlbum(Album $album): static
     {
         if (!$this->albums->contains($album)) {
