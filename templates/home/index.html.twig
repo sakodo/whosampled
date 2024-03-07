@@ -1,7 +1,5 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -12,96 +10,41 @@
     <div class='d-flex justify-content-center'>
         <img src="{{ asset('img/LOGO.png')}}" alt="" style='height: 200px;'>
         </div>
-<nav id='nav'>
-    <ul class="nav nav-pills nav-fill">
-        <li class="nav-item">
-            <a class="nav-link" href="#"><img src="{{ asset('img/home.png')}}" alt=""></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#"><img src="{{ asset('img/library.png')}}" alt=""></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#"><img src="{{ asset('img/favoris.png')}}" alt=""></a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link" href="#"><img src="{{ asset('img/search.png')}}" alt=""></a>
-        </li>
-    </ul>
-</nav>
-<header>
-    <div id='interview' class='container'>
     
-    <h2>interview</h2>
-        <div class='row'>
-            <div class='col-4'>
-                <h3>Pete Rock</h3>
-                <p>Legendary producer talks about the creative process behind the classic track "they Reminisce Over You"</p>
-            </div>
-            <div class='col-8'>
-                <img src="{{ asset('img/pete_rock.png')}}" alt="">
-            </div>
-        </div>
-    </div>
-</header>
+<div class='container'>
+                <div id='interview' >
+                <h2>interview</h2>
+                    <div class='row'>
+                        <div class='col-4'>
+                            <h3>Pete Rock</h3>
+                            <p>Legendary producer talks about the creative process behind the classic track "they Reminisce Over You"</p>
+                        </div>
+                        <div class='col-8'>
+                            <img src="{{ asset('img/pete_rock.png')}}" alt="">
+                        </div>
+                    </div>
+                </div>
+    
 {# <------------- section Header ------------------> #}
 
-<section class='section-plateform'>
-    <div id='platform' class='container'>
-        <h2>Platform</h2>
-    </div>
-    
-    <div class='container'>   
-        <div class="row">
-            <div class="col">
-                <img src="{{ asset('img/spotify.jpg')}}" alt="" style='height:50px;'>    
-            </div>
-            <div class="col">
-                <img src="{{ asset('img/youtube.png')}}" alt="" style='height:50px;'>    
-            </div>
-            <div class="col">
-                <img src="{{ asset('img/SoundCloud.jpg')}}" alt="" style='height:50px;'>    
-            </div>
-            <div class="col">
-                <img src="{{ asset('img/deezer.png')}}" alt="" style='height:50px;'>    
-            </div>
-        </div>
-    </div>
-</section>
 
 
-    <div id='sample' class='container'>
-        <h2>Weekly Top Sample</h2>
-    
+        <div id='sample' >
+            <h2>Weekly Top Sample</h2>
 
-        <div class='container'>
-            <div class='row'>
-                <div class='col-6'>
-                
-                    <img src="{{ asset('img/discovery_cover.jpg')}}" alt="">
-                    </p>album<p>
-                    <p>kendrick Lamar</p>
-                  
+                <div class='row'>
+                    {% for album in albums %}
+                        
+                    <div class='col-6'>
+                        <article class='albums'>
+                            <img src="/img/{{ album.imgcoverfile}}" alt="">
+                            <h4>{{ album.albumname}}</h4>
+                            <p>{{ album.producer}}</p>
+                        </article>    
+                    </div>
+                    {% endfor %}
                 </div>
-
-                <div class='col-6'>
-                    <img src="{{ asset('img/cover.jpg')}}" alt="">
-                    </p>album<p>
-                    <p>Drake</p>
-                </div>
-            </div>
         </div>
-    </div>
 
-
-    
-        
-
-
-    
-
-   
 </div>
 {% endblock %}

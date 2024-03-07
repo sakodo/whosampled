@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Album;
 use App\Repository\AlbumRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -13,14 +14,20 @@ class HomeController extends AbstractController
     #[Route('/home', name: 'app_home')]
     public function index(AlbumRepository $albumRepository ): Response
     {
+        $array_albums = [];
         $albums = $albumRepository->getDataAlbum();
-        $album = $albums[array_rand($albums)];
+        $album_key = array_rand($albums, 2);
         
-       
-             
+        
+        $array_albums[] = $albums[$album_key[0]] ;
+        $array_albums[] = $albums[$album_key[1]] ;
+        
+
+            //dd($array_albums);
+
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
-            'album' => $album,
+            'albums' => $array_albums,
         ]);
     }
 
