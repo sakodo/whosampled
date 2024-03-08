@@ -1,0 +1,11 @@
+@font-face {
+    font-family: outfit;
+    src: url(../fonts/Outfit-Medium.ttf) format(truetype);
+    font-style: "normal";
+}
+
+@font-face {
+    font-family: outfitlight;
+    src: url(../fonts/Outfit-Light.ttf) format(truetype);
+    font-style: "light";
+}
