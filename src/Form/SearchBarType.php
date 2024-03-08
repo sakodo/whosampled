@@ -2,22 +2,21 @@
 
 namespace App\Form;
 
-use App\Entity\Artist;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SearchTestType extends AbstractType
+class SearchBarType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('query', TextType::class, [
+            ->add('search', TextType::class, [
+                'label' => false,
                 'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Votre recherche'
+                    'placeholder' => 'Entrer votre recherche'
                 ]
             ])
             ->add('recherche', SubmitType::class,[
@@ -25,15 +24,13 @@ class SearchTestType extends AbstractType
                     'class' => 'btn btn-primary'
                 ]
             ])
-            ->getForm();
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-
         $resolver->setDefaults([
-            'data_class' => Artist::class,
+            // Configure your form options here
         ]);
     }
 }
