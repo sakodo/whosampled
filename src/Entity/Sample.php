@@ -32,6 +32,9 @@ class Sample
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $song_name = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $sample_cover_file = null;
+
 
 
     public function __construct()
@@ -114,6 +117,18 @@ class Sample
     public function setSongName(?string $song_name): static
     {
         $this->song_name = $song_name;
+
+        return $this;
+    }
+
+    public function getSampleCoverFile(): ?string
+    {
+        return $this->sample_cover_file;
+    }
+
+    public function setSampleCoverFile(?string $sample_cover_file): static
+    {
+        $this->sample_cover_file = $sample_cover_file;
 
         return $this;
     }
