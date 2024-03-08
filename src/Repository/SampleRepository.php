@@ -45,4 +45,31 @@ class SampleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findSampleById(int $id): ?Sample
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.songs', 'song') 
+            ->addSelect('song') 
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findSampleWithSongsById(int $id): ?Sample
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.songs', 'ss')
+            ->leftJoin('ss.artists', 'a')
+            ->addSelect('ss')
+            ->addSelect('a') 
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
+
+
+
