@@ -14,10 +14,13 @@ class SongController extends AbstractController
     public function index(int $id, SongRepository $songRepository): Response
     {
         $song = $songRepository->findSongById($id);
+        $samples = $songRepository->findSamplebySongId($id);
+        //dd($samples);
         // $song = $songRepository->findOneBy(['id' => $id]);
         //dd($song);
         return $this->render('song/song.html.twig', [
             'song' => $song,
+            'samples' => $samples,
         ]);
     }
 }
