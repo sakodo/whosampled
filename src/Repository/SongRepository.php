@@ -85,4 +85,14 @@ class SongRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findSamplebySongId(int $id): ?Song
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.samples', 'ss')
+            ->addSelect('ss') 
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

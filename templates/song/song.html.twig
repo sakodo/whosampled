@@ -16,5 +16,7 @@
     
 
     <h4>Sample use : </h4>
-    
+    {% for sample in song.samples %}
+        <p><a href="">{{ sample.samplesongorigin }}</a></p>
+    {% endfor %}
 {% endblock %}
