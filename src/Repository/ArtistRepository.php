@@ -31,7 +31,7 @@ class ArtistRepository extends ServiceEntityRepository
                ->getResult()
            ;
        }
-
+       
 
     //    /**
     //     * @return Artist[] Returns an array of Artist objects

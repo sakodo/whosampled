@@ -18,24 +18,45 @@ class SearchController extends AbstractController
     {
         $form = $this->createForm(SearchBarType::class);
         $form->handleRequest($request);
-
         $artists = [];
         $songs = [];
+        
         if($form->isSubmitted()&& $form->isValid()) {
-            $query = $form ->getData()['seach'];
-            return $this->redirectToRoute('app_search', ['query' => $query]);
+            $query = $form ->getData()['search'];
+             
+                return $this->redirectToRoute('app_search', ['query' => $query]);           
+            
             
         }
        
-        $searchTerm = $form->get('search')->getData();
-        $artists = $artistRepository->findByName($searchTerm);
-         $songs = $songRepository->findByName($searchTerm);
-            
+        if($searchTerm = $request->query->get('query')){
+            if($this->verifyCaracter($searchTerm)){
+
+                $artists = $artistRepository->findByName($searchTerm);
+                $songs = $songRepository->findByName($searchTerm);
+            }
+        };
+        
         return $this->render('search/index.html.twig', [
             'form' => $form->createView(),
             'artists' => $artists,
             'songs' => $songs,
         ]);
+    }
+    /**
+     * Permet de verifier si la chaine est correct
+     *
+     * @param [type] 
+     * @return bool
+     */
+    function verifyCaracter($query) {
+        // Utilisation d'une expression régulière pour vérifier les caractères autorisés
+        // La regex /^[a-zA-Z0-9' -]+$/ vérifie que la chaîne ne contient que des lettres minuscules, majuscules, chiffres, apostrophes et tirets.
+        if (preg_match('/^[a-zA-Z0-9\' -]+$/', $query)) {
+            return true; // La chaîne ne contient que des caractères autorisés
+        } else {
+            return $this->redirectToRoute('app_search'); // La chaîne contient des caractères non autorisés
+        }
     }
 
    
