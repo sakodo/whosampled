@@ -3,25 +3,25 @@
 {% block title %}Resultat{% endblock %}
 
 {% block body %}
-    {# {{ dump(artists) }}
-    {{ dump(songs) }} #}
+    {{ dump(artists) }}
+    {{ dump(songs) }}
 
    {{ form(form) }}
     
     <h2>Artistes</h2>
 
-    {# {% for artist in artists %}
+    {% for artist in artists %}
         <div>
             {{artist.artistname}}
         </div>
-    {% endfor %} #}
+    {% endfor %}
 
     <h2>Chansons</h2>
 
-    {# {% for song in songs %}
+    {% for song in songs %}
         <div>
             {{song.songname}}
         </div>
-    {% endfor %} #}
+    {% endfor %}
 
 {% endblock %}
