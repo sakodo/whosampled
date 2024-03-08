@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chanson{% endblock %}
+
+{% block body %}
+    <h1>{{ song.songname }}</h1>
+
+    {% for album in song.albums %}
+        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album">
+    {% endfor %}  
+     
+   <figure>
+        <figcaption>Listen to :</figcaption>
+        <audio controls src="/audio-whosampled/{{song.audiosongfile}}"></audio>
+    </figure>
+    
+
+    <h4>Sample use : </h4>
+    
+{% endblock %}

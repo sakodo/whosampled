@@ -45,4 +45,35 @@ class SongRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
+
+    public function findSongById(int $id): ?Song
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.albums', 'a') 
+            ->addSelect('a') 
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findSongByName(string $song_name): ?Song
+    {
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.song_name = :song_name')
+            ->setParameter('song_name', $song_name)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
+
+    public function findSongByAlbumId(int $album_id): ?array
+    {
+        return $this->createQueryBuilder('s')
+            ->innerJoin('s.albums', 'a')
+            ->andWhere('a.id = :album_id')
+            ->setParameter('album_id', $album_id)
+            ->getQuery()
+            ->getResult();
+    }
+
 }
