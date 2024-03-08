@@ -21,13 +21,12 @@ class ArtistRepository extends ServiceEntityRepository
         parent::__construct($registry, Artist::class);
     }
 
-    public function findArtistByName(string $query): array
+    public function findByName(string $query): array
        {
-           return $this->createQueryBuilder('a')
-               ->andWhere('a.artist_name = :val')
+           return $this->createQueryBuilder('a') 
+               ->andWhere('a.artist_name LIKE :val')
                ->setParameter('val', '%'.$query.'%')
-               ->orderBy('a.id', 'ASC')
-               ->setMaxResults(10)
+               ->orderBy('a.artist_name', 'ASC')
                ->getQuery()
                ->getResult()
            ;

@@ -20,7 +20,16 @@ class SongRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Song::class);
     }
-
+    public function findByName($query):array
+    {
+        return $this->createQueryBuilder('a')
+               ->andWhere('a.song_name LIKE :val')
+               ->setParameter('val', '%'.$query.'%')
+               ->orderBy('a.song_name', 'ASC')
+               ->getQuery()
+               ->getResult()
+           ;
+    }
     //    /**
     //     * @return Song[] Returns an array of Song objects
     //     */
@@ -76,4 +85,14 @@ class SongRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findSamplebySongId(int $id): ?Song
+    {
+        return $this->createQueryBuilder('s')
+            ->leftJoin('s.samples', 'ss')
+            ->addSelect('ss') 
+            ->andWhere('s.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

@@ -2,11 +2,11 @@
 
 namespace App\Controller;
 
-use App\Form\SearchTestType;
+use App\Entity\Artist;
+use App\Form\SearchBarType;
 use App\Repository\ArtistRepository;
+use App\Repository\SongRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -14,70 +14,45 @@ use Symfony\Component\Routing\Attribute\Route;
 class SearchController extends AbstractController
 {
     #[Route('/search', name: 'app_search')]
-    public function index(SearchTestType $form): Response
+    public function index(Request $request, ArtistRepository $artistRepository, SongRepository $songRepository): Response
     {
-        
-        return $this->render('search/index.html.twig', [
-            'controller_name' => 'SearchController',
-        ]);
-    }
+        $form = $this->createForm(SearchBarType::class);
+        $form->handleRequest($request);
 
-    #[Route('/search/bar', name: 'app_searchBar')]
-    /**
-     * construction de la barre de recherche
-     *
-     * @return barre de recherche
-     */
-    public function searchBar(): Response {
-
-        
-        $form = $this->createFormBuilder()
-            ->setAction($this->generateUrl('app_handleSearch'))
-            ->add('query', TextType::class,
-            [
-                'label' => false,
-                'attr' => [
-                    'class' => 'form-control',
-                    'placeholder' => 'Entrez votre recherche'
-                ]
-            ]
-            )
-            ->add('recherche', SubmitType::class, [
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
-            ->getForm();
-        return $this->render('search/search.html.twig',[
-            'form' => $form->createView()
-        ]);
-    }
-
-    /**
-     * Recupération de la recherche de l'utilisateur 
-     *
-     * @param Request $request
-     * @param ArtistRepository $artist
-     * @param SongRepository $song
-     * @return void
-     */
-    #[Route('/search/bar/handleSearch', name: "app_handleSearch")]
-    public function handleSearch(Request $request, ArtistRepository $artist) :Response {
-
-        $query = $request->getContent();
-        parse_str(urldecode($query), $decoded);
-        $queryName = $decoded['form']['query'];
-
-        if($query) {
-            $artists = $artist->findArtistByName($queryName);
-            // $songs = $song->findSongByName($query);
-           
+        $artists = [];
+        $songs = [];
+        if($form->isSubmitted()&& $form->isValid()) {
+            $query = $form ->getData()['seach'];
+            return $this->redirectToRoute('app_search', ['query' => $query]);
+            
         }
+       
+        $searchTerm = $form->get('search')->getData();
+        $artists = $artistRepository->findByName($searchTerm);
+         $songs = $songRepository->findByName($searchTerm);
+            
         return $this->render('search/index.html.twig', [
+            'form' => $form->createView(),
             'artists' => $artists,
-            // 'songs' => $songs
+            'songs' => $songs,
         ]);
     }
+
+   
 
     
 }
+
+
+
+        // if ($form->isSubmitted() && $form->isValid()) {
+        //     $query = $form->getData()['search'];
+        //     return $this->redirectToRoute('app_search', ['query' => $query]);
+        // }
+
+        // if ($search = $request->query->get('query')) {
+        //     $albums = $albumRepository->findByTitle($search);
+        //     $songs = $songRepository->findByTitle($search);
+        // }
+
+
