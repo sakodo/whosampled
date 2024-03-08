@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Chanson
+{% endblock %}
+
+{% block body %}
+
+	<div class="row">
+		<div class="col-6">
+			<h2>{{ sample.samplesongorigin }}</h2>
+			<p>{{ sample.sampleartistorigin }}</p>
+			<figure>
+				<figcaption>Listen to :</figcaption>
+				<audio controls src="/audio-whosampled/{{sample.audiosamplefile}}"></audio>
+			</figure>
+		</div>
+
+		<div class="col-6">
+			{% for album in song.albums %}
+				<img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album">
+			{% endfor %}
+			<h2>{{ song.songname }}</h2>
+           
+			<figure>
+				<figcaption>Listen to :</figcaption>
+				<audio controls src="/audio-whosampled/{{song.audiosongfile}}"></audio>
+			</figure>
+		</div>
+
+	</div>
+
+{% endblock %}
