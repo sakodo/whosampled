@@ -32,6 +32,17 @@ class ArtistRepository extends ServiceEntityRepository
            ;
        }
 
+    public function findArtistWithSongsById(int $id): ?Artist
+       {
+           return $this->createQueryBuilder('a')
+               ->leftJoin('a.songs', 's') 
+               ->addSelect('s') 
+               ->andWhere('a.id = :id')
+               ->setParameter('id', $id)
+               ->getQuery()
+               ->getOneOrNullResult();
+       }
+
 
     //    /**
     //     * @return Artist[] Returns an array of Artist objects
