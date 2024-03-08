@@ -27,3 +27,9 @@
 
 /node_modules/
 .DS_Store
+templates/song/song.html.twig
+src/Controller/ArticleController.php
+src/Controller/SongController.php
+src/Controller/ArticleController.php
+src/Controller/ArticleController.php
+templates/security/login.html.twig
