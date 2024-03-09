@@ -27,12 +27,13 @@ class ArtistRepository extends ServiceEntityRepository
                ->andWhere('a.artist_name LIKE :val')
                ->setParameter('val', '%'.$query.'%')
                ->orderBy('a.artist_name', 'ASC')
+               ->orderBy('a.img_artist_file')
                ->getQuery()
                ->getResult()
            ;
        }
-       
-
+    
+    
     //    /**
     //     * @return Artist[] Returns an array of Artist objects
     //     */

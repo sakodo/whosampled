@@ -57,23 +57,5 @@ class SearchController extends AbstractController
         } else {
             return $this->redirectToRoute('app_search'); // La chaîne contient des caractères non autorisés
         }
-    }
-
-   
-
-    
+    }    
 }
-
-
-
-        // if ($form->isSubmitted() && $form->isValid()) {
-        //     $query = $form->getData()['search'];
-        //     return $this->redirectToRoute('app_search', ['query' => $query]);
-        // }
-
-        // if ($search = $request->query->get('query')) {
-        //     $albums = $albumRepository->findByTitle($search);
-        //     $songs = $songRepository->findByTitle($search);
-        // }
-
-
