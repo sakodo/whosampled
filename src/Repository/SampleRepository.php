@@ -69,6 +69,8 @@ class SampleRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+   
 }
 
 

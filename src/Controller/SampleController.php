@@ -15,12 +15,11 @@ class SampleController extends AbstractController
     public function index(int $id, SampleRepository $sampleRepository): Response
     {
         $sample = $sampleRepository->findSampleWithSongsById($id);
-      
-
-        //dd($songs);
-        dd($sample);
+        $audioSampleFile = $sample->getAudioSampleFile();
+        //dd($audioSampleFile);
         return $this->render('sample/sample.html.twig', [
             'sample' => $sample,
+            'audio_sample_file' => $audioSampleFile,
             
         ]);
     }
