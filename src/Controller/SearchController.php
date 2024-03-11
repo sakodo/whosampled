@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Artist;
 use App\Form\SearchBarType;
 use App\Repository\ArtistRepository;
 use App\Repository\SongRepository;
@@ -21,21 +20,25 @@ class SearchController extends AbstractController
         $artists = [];
         $songs = [];
         
-        if($form->isSubmitted()&& $form->isValid()) {
-            $query = $form ->getData()['search'];
-             
-                return $this->redirectToRoute('app_search', ['query' => $query]);           
+        //verifie si il y a un envoi et si c'est valid
+        if($form->isSubmitted() && $form->isValid()) {
             
+            $query = $form->getData()['search'];
+            return $this->redirectToRoute('app_search', ['query' => $query]);           
             
         }
-       
-        if($searchTerm = $request->query->get('query')){
+        // Recupére la requête si elle pas vide dans une variable
+        if($searchTerm = $request->query->get('query')){  
+        
+             // permet de verifier si la requête de la recherche est au bon format
             if($this->verifyCaracter($searchTerm)){
 
                 $artists = $artistRepository->findByName($searchTerm);
                 $songs = $songRepository->findByName($searchTerm);
+               
             }
-        };
+            
+        }
         
         return $this->render('search/index.html.twig', [
             'form' => $form->createView(),
@@ -43,11 +46,13 @@ class SearchController extends AbstractController
             'songs' => $songs,
         ]);
     }
+
+
     /**
      * Permet de verifier si la chaine est correct
      *
-     * @param [type] 
-     * @return bool
+     * @param
+     * @return return True si les caractères sont autorisés sinon redirige vers la app_search
      */
     function verifyCaracter($query) {
         // Utilisation d'une expression régulière pour vérifier les caractères autorisés
