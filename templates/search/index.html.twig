@@ -1,27 +1,67 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Resultat{% endblock %}
+{% block title %}Resultats de la recherche{% endblock %}
 
 {% block body %}
-    {{ dump(artists) }}
-    {{ dump(songs) }}
+<main class="flex-column">
+        {{dump(artists)}}
+        {{dump(songs)}}
+        {# <!-----champ de recherche-----> #}
+            {{form(form)}}
+        {# <!-----champ de recherche-----> #}
 
-   {{ form(form) }}
-    
-    <h2>Artistes</h2>
+        <section class="">
 
-    {% for artist in artists %}
-        <div>
-            {{artist.artistname}}
-        </div>
-    {% endfor %}
+            <h3><strong>ARTISTES</strong></h3>
+            <div class="artiste mb-5">
+                {% for artist in artists %}
+                    {{dump(artist)}}
+                    <a href="#" class="d-flex flex-column align-items-start text-decoration-none text-dark">
+                        <img src="/images/{{artist.imgArtistFile}}" alt="photoartiste" class="me-2">
+                        <h4 class="text-center">{{artist.artistName}}</h4>
+                    </a>
+                {% endfor %}
+            </div>
+            {% if songs != [] %}
+                {% for song in songs %}
+                    <div class="morceaux mb-5 col-6">
 
-    <h2>Chansons</h2>
+                        <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
+                            <div>
+                                <img src="/images/aerodynamic.jpg" alt="pochette2" class="pochette me-1">
+                            </div>
+                            <span class="flex-column">
+                                <h5 class="mb-0">Aerodynamic</h5>
+                                <p>Daft Punk</p>
+                            </span>
+                        </a>
+                {% endfor %}
+                    {# <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
+                        <div>
+                            <img src="/images/da_funk.jpg" alt="pochette3" class="pochette me-1">
+                        </div>
+                        <span class="flex-column">
+                            <h5 class="mb-0">Da Funk</h5>
+                            <p>Daft Punk</p>
+                        </span>
+                    </a>
 
-    {% for song in songs %}
-        <div>
-            {{song.songname}}
-        </div>
-    {% endfor %}
+                    <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
+                        <div>
+                            <img src="/images/harder_better.jpg" alt="pochette4" class="pochette me-1">
+                        </div>
+                        <span class="flex-column">
+                            <h5 class="mb-0">Harder Better Faster Stronger</h5>
+                            <p>Daft Punk</p>
+                        </span>
+                    </a>
+                </div> #}
+            {% else %}
 
+            {% endif %}
+            <h3><strong></strong></h3>
+
+
+
+        </section>
 {% endblock %}
