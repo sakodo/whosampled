@@ -1,22 +1,32 @@
 <header>
-        <div class="container2">
-            <img src="/img/logo.png" alt="logo">
+	<div class="container2">
+		<img src="/img/logo.png" alt="logo">
 
-            <div class="navdroite">
-                <input id='register' type="text" placeholder="Rechercher">
+		<div class="navdroite">
+			<input id='register' type="text" placeholder="Rechercher">
 
-                <a href="#" class="iconefav">
-                    <img src="/img/favoris.png" alt="iconefav">
-                    <p>Favoris</p>
-                </a>
-                <a href="#" class="librairies">
-                    <img src="/img/library.png" alt="iconelib">
-                    <p>Librairies</p>
-                </a>
-                <a href="login" clas="signin">
-                    <img src="/img/profile.png" alt="signin">
-                    <p>Signin</p>
-                </a>
-            </div>
-        </div>
-    </header>
+			<a href="#" class="iconefav">
+				<img src="/img/favoris.png" alt="iconefav">
+				<p>Favoris</p>
+			</a>
+			<a href="#" class="librairies">
+				<img src="/img/library.png" alt="iconelib">
+				<p>Librairies</p>
+			</a>
+
+			{% if app.user %}
+				<a href="{{ path('app_logout') }}">Se déconnecter</a>
+            {% else %}
+				<a href="register" class="register">
+					<p>S'inscrire</p>
+				</a>
+				<a href="login" class="signin">
+					<img src="/img/profile.png" alt="signin">
+					<p>Se connecter</p>
+				</a>
+            {% endif %}
+
+
+		</div>
+	</div>
+</header>
