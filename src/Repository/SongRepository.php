@@ -22,12 +22,15 @@ class SongRepository extends ServiceEntityRepository
     }
     public function findByName($query):array
     {
-        return $this->createQueryBuilder('a')
-               ->andWhere('a.song_name LIKE :val')
-               ->setParameter('val', '%'.$query.'%')
-               ->orderBy('a.song_name', 'ASC')
-               ->getQuery()
-               ->getResult()
+        return $this->createQueryBuilder('s')
+                    ->leftJoin('s.artists','a')
+                    ->leftJoin('s.albums', 'al')
+                    ->addSelect('a','al')
+                    ->andWhere('s.song_name LIKE :val')
+                    ->setParameter('val', '%'.$query.'%')
+                    ->orderBy('s.song_name', 'ASC')
+                    ->getQuery()
+                    ->getResult()
            ;
     }
     //    /**

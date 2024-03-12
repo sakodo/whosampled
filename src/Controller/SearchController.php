@@ -35,7 +35,8 @@ class SearchController extends AbstractController
 
                 $artists = $artistRepository->findByName($searchTerm);
                 $songs = $songRepository->findByName($searchTerm);
-               
+                
+           
             }
             
         }
