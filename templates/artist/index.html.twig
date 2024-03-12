@@ -5,7 +5,7 @@
 {% block body %}
     
     {{dump(artists)}}
-    {{dump(albums)}}
+    {{dump(songs)}}
     <div class='container'> 
     
         <section class="ficheartiste">
@@ -24,15 +24,17 @@
 
         
         <section class="tracklist">
-        {% for album in albums %}
+            {% for song in songs %}
+            
             <div class="harderbetter">
-                <img src="/img/{{ album.imgcoverfile}}" alt="harderbetter" class="img-fluid" style= "width: 100px; height:100px">
-                <h3><a href="/album/{{ album.id }}">{{ album.albumname }}</a></h3>
-                <p>Année de sortie: {{ album.releasedate|date('Y') }}</p>
+
+                <img src="/img/{{ song.albums[0].imgcoverfile}}" alt="harderbetter" class="img-fluid" style= "width: 100px; height:100px">
+                <h3><a href="/song/{{ song.id }}">{{ song.songname }}</a></h3>
+                <p>Année de sortie: {{ song.albums[0].releasedate|date('Y') }}</p>
             </div>
                
             
-        {% endfor %}
+            {% endfor %}
         </section>
     </div>    
 
