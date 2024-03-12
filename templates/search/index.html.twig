@@ -4,8 +4,6 @@
 
 {% block body %}
 <main class="flex-column">
-        {{dump(artists)}}
-        {{dump(songs)}}
         {# <!-----champ de recherche-----> #}
             {{form(form)}}
         {# <!-----champ de recherche-----> #}
@@ -13,55 +11,40 @@
         <section class="">
 
             <h3><strong>ARTISTES</strong></h3>
-            <div class="artiste mb-5">
-                {% for artist in artists %}
-                    {{dump(artist)}}
-                    <a href="#" class="d-flex flex-column align-items-start text-decoration-none text-dark">
-                        <img src="/images/{{artist.imgArtistFile}}" alt="photoartiste" class="me-2">
-                        <h4 class="text-center">{{artist.artistName}}</h4>
-                    </a>
-                {% endfor %}
-            </div>
-            {% if songs != [] %}
+            {% if artists|length > 0 %}
+                <div class="artiste mb-5">
+                    {% for artist in artists %}            
+                        <a href="/artist/{{ artist.id }}" class="d-flex flex-column align-items-start text-decoration-none text-dark">
+                            <img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="me-2">
+                            <h4 class="text-center">{{ artist.artistName }}</h4>
+                        </a>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p>Aucun artiste correspondant à la recherche</p>
+            {% endif %}
+
+            <h3><strong>CHANSONS</strong></h3>
+            {% if songs|length > 0 %}
                 {% for song in songs %}
                     <div class="morceaux mb-5 col-6">
-
-                        <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
+                        <a href="/song/{{ song.id }}" class="d-flex flex-row mt-4 text-decoration-none text-dark">
                             <div>
-                                <img src="/images/aerodynamic.jpg" alt="pochette2" class="pochette me-1">
+                                {% if song.albums|length > 0 %} 
+                                    <img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="pochette me-1">
+                                {% endif %}
                             </div>
                             <span class="flex-column">
-                                <h5 class="mb-0">Aerodynamic</h5>
-                                <p>Daft Punk</p>
+                                <h5 class="mb-0">{{ song.songname }}</h5>
+                                {% if song.artists|length > 0 %} 
+                                    <p>{{ song.artists[0].artistname }}</p>
+                                {% endif %}
                             </span>
                         </a>
-                {% endfor %}
-                    {# <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
-                        <div>
-                            <img src="/images/da_funk.jpg" alt="pochette3" class="pochette me-1">
-                        </div>
-                        <span class="flex-column">
-                            <h5 class="mb-0">Da Funk</h5>
-                            <p>Daft Punk</p>
-                        </span>
-                    </a>
-
-                    <a href="#" class="d-flex flex-row mt-4 text-decoration-none text-dark">
-                        <div>
-                            <img src="/images/harder_better.jpg" alt="pochette4" class="pochette me-1">
-                        </div>
-                        <span class="flex-column">
-                            <h5 class="mb-0">Harder Better Faster Stronger</h5>
-                            <p>Daft Punk</p>
-                        </span>
-                    </a>
-                </div> #}
+                {% endfor %}          
             {% else %}
-
+                <p>Aucune chanson correspondant à la recherche</p>
             {% endif %}
-            <h3><strong></strong></h3>
-
-
 
         </section>
 {% endblock %}

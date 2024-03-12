@@ -22,18 +22,18 @@ class ArtistRepository extends ServiceEntityRepository
     }
 
     public function findByName(string $query): array
-       {
-           return $this->createQueryBuilder('a') 
-                    ->andWhere('a.artist_name LIKE :val')
-                    ->setParameter('val', '%'.$query.'%')
-                    ->orderBy('a.artist_name', 'ASC')
-                    ->orderBy('a.img_artist_file')
-                    ->getQuery()
-                    ->getResult()
-           ;
-       }
+        {
+            return $this->createQueryBuilder('a')
+                        ->andWhere('a.artist_name LIKE :val')
+                        ->setParameter('val', '%'.$query.'%')
+                        ->orderBy('a.artist_name', 'ASC')
+                        ->orderBy('a.img_artist_file')
+                        ->getQuery()
+                        ->getResult()
+            ;
+        }
 
-    public function findArtistWithSongsById(int $id): ?Artist
+    public function findArtistWithSongsById(string $id): ?Artist
        {
            return $this->createQueryBuilder('a')
                ->leftJoin('a.songs', 's') 
