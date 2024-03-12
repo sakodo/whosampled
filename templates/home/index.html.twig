@@ -1,43 +1,41 @@
 {% extends 'base.html.twig' %}
 
+
+
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<main class="flex-column">
 
-
+ <div class='mb-5'>
     <div class='d-flex justify-content-center'>
         <img src="{{ asset('img/LOGO.png')}}" alt="" style='height: 200px;'>
         </div>
+    </div>
     
 <div class='container'>
-                <div id='interview' >
-                <h2>interview</h2>
+            <div class='mt-5'>
+                <h2 style="background-color: #f8f9fa;">Interview</h2>
                     <div class='row'>
-                        <div class='col-4'>
-                            <h3>Pete Rock</h3>
-                            <p>Legendary producer talks about the creative process behind the classic track "they Reminisce Over You"</p>
+                        <div class='col-8 mt-4'>
+                            <h4>Pete Rock</h4>
+                            <p>Legendary producer talks about the creative process behind the classic track "they Reminisce Over You". Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio impedit quaerat eligendi et exercitationem quos, officia omnis architecto sit saepe possimus tempore nam voluptates necessitatibus nostrum dolorem velit repellendus rem?</p>
                         </div>
-                        <div class='col-8'>
-                            <img src="{{ asset('img/pete_rock.png')}}" alt="">
+                        <div class='col-4 mt-4'>
+                            <img src="{{ asset('img/pete_rock.png')}}" alt="" class="img-fluid" style="width: 200px; height: 200px;" >
                         </div>
                     </div>
-                </div>
+            </div>
     
-{# <------------- section Header ------------------> #}
 
 
 
-        <div id='sample' >
-            <h2>Weekly Top Sample</h2>
 
+        <div class='mt-5'>
+            <h2 style="background-color: #f8f9fa;">Weekly Top Sample</h2>
                 <div class='row'>
                     {% for album in albums %}
-                        
-                    <div class='col-6'>
+                    <div class='col-6 mt-4'>
                         <article class='albums'>
-                            <img src="/img/{{ album.imgcoverfile}}" alt="">
+                            <img src="/img/{{ album.imgcoverfile}}" alt=""  class="img-fluid" style="width: 200px; height: 200px;">
                             <h4>{{ album.albumname}}</h4>
                             <p>{{ album.producer}}</p>
                         </article>    
@@ -47,4 +45,8 @@
         </div>
 
 </div>
+</main>
+{% endblock %}
+
+{% block javascripts %}
 {% endblock %}

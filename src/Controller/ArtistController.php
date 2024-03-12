@@ -15,7 +15,7 @@ class ArtistController extends AbstractController
     { 
         $artist = $artists->findArtistWithSongsById($id);
         $songs = $artist->getSongs();
-        dd($songs);
+        //dd($songs);
         return $this->render('artist/index.html.twig', [
             'controller_name' => 'ArtistController',
             'artist'=>$artist

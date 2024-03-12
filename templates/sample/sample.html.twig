@@ -4,13 +4,13 @@
 {% endblock %}
 
 {% block body %}
-	<main class="centrepage">
+	<main class="flex-column">
 		<div class="row">
 			<div class="col-6">
 				<article class="sampleur">
 					{% for song in sample.songs %}
 						{% for artist in song.artists %}
-							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 200px; height: 200px;" >
+							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 200px; height:200px;" >
 						{% endfor %}
 					{% endfor %}
 					<h3>{{sample.songs[0].songname}}</h3>
@@ -28,7 +28,7 @@
 			
 			<div class="col-6">
 				<article class="original">
-					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 200px; height: 200px;">
+					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 200px; height:200px;">
 					<h3>{{ sample.samplesongorigin }}</h3>
 					<h4>{{ sample.sampleartistorigin }}</h4>
 					<p>Sample appears at

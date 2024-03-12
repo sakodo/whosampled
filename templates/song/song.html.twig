@@ -3,20 +3,28 @@
 {% block title %}Chanson{% endblock %}
 
 {% block body %}
-    <h1>{{ song.songname }}</h1>
+<main class="flex-column">
+ <div class='mt-5'>
+<h2 style="background-color: #f8f9fa;">Chanson :</h2>
+    <h3>{{ song.songname }}</h3>
 
     {% for album in song.albums %}
-        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album">
+        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album" class="img-fluid" style="width: 200px; height: 200px;">
     {% endfor %}  
      
    <figure>
-        <figcaption>Listen to :</figcaption>
+        <figcaption>Ecouter la chanson :</figcaption>
         <audio controls src="/audio-whosampled/{{song.audiosongfile}}"></audio>
     </figure>
-    
-
-    <h4>Sample use : </h4>
-    {% for sample in song.samples %}
-        <p><a href="{{ path('app_sample', {id: sample.id}) }}">{{ sample.samplesongorigin }}</a></p>
+ </div>  
+ <div class='mt-5'>
+    <h2 style="background-color: #f8f9fa;">Sample(s) utilisé(s) :</h2>
+{% for sample in song.samples %}
+        <div class="d-flex align-items-center">
+            <img src="/img/{{ sample.samplecoverfile }}" alt="" class="img-fluid" style="width: 100px; height: 100px; padding: 10px;">
+            <p><a href="{{ path('app_sample', {id: sample.id}) }}">{{ sample.samplesongorigin }}</a></p>
+        </div>
+ </div>
     {% endfor %}
+    </main>
 {% endblock %}

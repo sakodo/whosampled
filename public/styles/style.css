@@ -21,6 +21,8 @@ main {
     justify-content: space-around;
     font-family: outfit;
     background-color: white;
+    padding-bottom: 7rem;
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.39);
 }
 
 
@@ -29,6 +31,7 @@ header {
     height: 80px;
     box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.39);
     background-color: white;
+    position: relative;
 }
 
 header .container {
@@ -84,7 +87,7 @@ a img {
 
 footer {
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.39);
-    height: 400px;
+    height: 250px;
     background-color: white;
 }
 
