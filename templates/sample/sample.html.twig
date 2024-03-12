@@ -4,33 +4,42 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="row">
-		<div class="col-6">
-			<p><img src="/img/{{sample.samplecoverfile}}" alt=""></p>
-			<h5>{{ sample.samplesongorigin }}</h5>
-			<p>{{ sample.sampleartistorigin }}</p>
-			<figure>
-				
-				<audio controls src="/audio-whosampled/{{ sample.audiosamplefile }}"></audio>
-			</figure>
+	<main class="centrepage">
+		<div class="row">
+			<div class="col-6">
+				<article class="sampleur">
+					{% for song in sample.songs %}
+						{% for artist in song.artists %}
+							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 200px; height: 200px;" >
+						{% endfor %}
+					{% endfor %}
+					<h3>{{sample.songs[0].songname}}</h3>
+					{% for artist in sample.songs[0].artists %}
+						<h4>{{ artist.getArtistName() }}</h4>
+					{% endfor %}
+					<p>Sample appears at
+						<a href="#">0:23</a>
+						and
+						<a href="#">2:25</a>
+						(and throughout)</p>
+					<audio controls src="/audio-whosampled/{{sample.songs[0].audiosongfile}}"></audio>
+				</article>
+			</div>
+			
+			<div class="col-6">
+				<article class="original">
+					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 200px; height: 200px;">
+					<h3>{{ sample.samplesongorigin }}</h3>
+					<h4>{{ sample.sampleartistorigin }}</h4>
+					<p>Sample appears at
+						<a href="#">2:06</a>
+						and
+						<a href="#">2:04</a>
+					</p>
+					<audio controls src="/audio-whosampled/{{ sample.audiosamplefile }}"></audio>
+				</article>
+			</div>
 		</div>
-
-		<div class="col-6">
-			{% for song in sample.songs %}
-				{% for artist in song.artists %}
-					<img src="/img/{{artist.getImgArtistFile()}}" alt="">
-				{% endfor %}
-			{% endfor %}
-			<h5>{{sample.songs[0].songname}}</h5>
-			{% for artist in sample.songs[0].artists %}
-				<p>{{ artist.getArtistName() }}</p>
-			{% endfor %}
-			<figure>
-				
-				<audio controls src="/audio-whosampled/{{sample.songs[0].audiosongfile}}"></audio>
-			</figure>
-		</div>
-</div>
+	</main>
 
 {% endblock %}
