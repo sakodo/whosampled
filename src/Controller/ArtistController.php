@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\AlbumRepository;
 use App\Repository\ArtistRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -11,14 +12,16 @@ class ArtistController extends AbstractController
 {
     #[Route('/artist/{id}', name: 'app_artist')]
     
-    public function index(ArtistRepository $artists, int $id): Response
+    public function index(ArtistRepository $artistRepositrory, AlbumRepository $albumRepository, int $id): Response
     { 
-        $artist = $artists->findArtistWithSongsById($id);
-        $songs = $artist->getSongs();
-        dd($songs);
+        $artists = $artistRepositrory -> findArtistWithSongsById($id);
+        $albums  = $albumRepository   -> getDataAlbum();
+
+       
         return $this->render('artist/index.html.twig', [
             'controller_name' => 'ArtistController',
-            'artist'=>$artist
+            'artists'         => $artists,
+            'albums'          => $albums ,
         ]);
     }
 }
