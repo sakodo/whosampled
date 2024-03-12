@@ -15,7 +15,7 @@
                 <div class="artiste mb-5">
                     {% for artist in artists %}            
                         <a href="/artist/{{ artist.id }}" class="d-flex flex-column align-items-start text-decoration-none text-dark">
-                            <img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="me-2">
+                            <img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="img-fluid" style="width: 100px; height: 100px;">
                             <h4 class="text-center">{{ artist.artistName }}</h4>
                         </a>
                     {% endfor %}
@@ -31,7 +31,7 @@
                         <a href="/song/{{ song.id }}" class="d-flex flex-row mt-4 text-decoration-none text-dark">
                             <div>
                                 {% if song.albums|length > 0 %} 
-                                    <img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="pochette me-1">
+                                    <img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="img-fluid" style="width: 100px; height: 100px;">
                                 {% endif %}
                             </div>
                             <span class="flex-column">
@@ -47,4 +47,6 @@
             {% endif %}
 
         </section>
+    </main>
+    
 {% endblock %}
