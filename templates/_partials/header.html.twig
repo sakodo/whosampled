@@ -1,4 +1,5 @@
 <header>
+<<<<<<< HEAD
 	<div class="container2">
 		<img src="/img/logo.png" alt="logo">
 
@@ -13,6 +14,35 @@
 				<img src="/img/library.png" alt="iconelib">
 				<p>Librairies</p>
 			</a>
+=======
+        <div class="container2">
+            <img src="/img/logo.png" alt="logo">
+
+            <div class="navdroite">
+                <input id='register' type="text" placeholder="Rechercher">
+                 {% if app.user %}
+                <a href="#" class="iconefav">
+                    <img src="/img/favoris.png" alt="iconefav">
+                    <p>Favoris</p>
+                </a>
+                 {% endif %}
+
+            {% if app.user %}
+             <a href="{{ path('app_logout') }}" clas="signout">
+              <img src="/img/profile.png" alt="signout">
+                <p>Déconnexion</p>
+             </a>
+           {% else %}
+             <a href="{{ path('app_login') }}" clas="signin">
+                <img src="/img/profile.png" alt="signin">
+                    <p>Connexion</p>
+             </a>                       
+            <a href="{{ path('app_register') }}" class="inscription">
+              <img src="/img/inscription.png" alt="inscription">
+                 <p>Inscription</p>
+            </a>
+           {% endif %}
+>>>>>>> khaled
 
 			{% if app.user %}
 				<a href="{{ path('app_logout') }}">Se déconnecter</a>
