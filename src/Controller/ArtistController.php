@@ -15,17 +15,15 @@ class ArtistController extends AbstractController
     
     public function index(ArtistRepository $artistRepositrory, SongRepository $songRepository, int $id): Response
     { 
-        $artist = $artists->findArtistWithSongsById($id);
-        $songs = $artist->getSongs();
-        //dd($songs);
+        
         $artists = $artistRepositrory -> findArtistWithSongsById($id);
-        $songs  = $songRepository   ->  findAllsong();
+        $songs   = $songRepository    ->  findAllsong();
 
        
-        return $this->render('artist/index.html.twig', [
+        return $this->render('artist/artist.html.twig', [
             'controller_name' => 'ArtistController',
             'artists'         => $artists,
-            'songs'          => $songs ,
+            'songs'           => $songs ,
         ]);
     }
 }

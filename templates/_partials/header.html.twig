@@ -3,7 +3,11 @@
             <img src="/images/logo.png" alt="logo">
 
             <div class="navdroite">
-                <input type="text" placeholder="Rechercher">
+                {{ form(form) }}
+                {# <form action="{{path('app_search')}}" method="POST">
+             
+                    <input type="search" placeholder="Rechercher">
+                </form> #}
                 <a href="{{ path('app_login') }}" class="signin">
                     <img src="/images/profile.png" alt="signin">
                     <p>Connexion</p>
@@ -15,3 +19,4 @@
             </div>
         </nav>
     </header>
+

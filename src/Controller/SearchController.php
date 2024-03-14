@@ -17,34 +17,30 @@ class SearchController extends AbstractController
     {
         $form = $this->createForm(SearchBarType::class);
         $form->handleRequest($request);
+
         $artists = [];
-        $songs = [];
+        $songs   = [];
         
         //verifie si il y a un envoi et si c'est valid
-        if($form->isSubmitted() && $form->isValid()) {
-            
+        if($form->isSubmitted() && $form->isValid()) {  
+       
             $query = $form->getData()['search'];
             return $this->redirectToRoute('app_search', ['query' => $query]);           
             
         }
         // Recupére la requête si elle pas vide dans une variable
         if($searchTerm = $request->query->get('query')){  
-        
              // permet de verifier si la requête de la recherche est au bon format
             if($this->verifyCaracter($searchTerm)){
-
                 $artists = $artistRepository->findByName($searchTerm);
-                $songs = $songRepository->findByName($searchTerm);
-                
-           
-            }
-            
+                $songs   = $songRepository->findByName($searchTerm);      
+            }    
         }
         
         return $this->render('search/search.html.twig', [
-            'form' => $form->createView(),
+            'form'    => $form->createView(),
             'artists' => $artists,
-            'songs' => $songs,
+            'songs'   => $songs,
         ]);
     }
 

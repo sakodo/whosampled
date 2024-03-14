@@ -16,7 +16,7 @@ class SearchBarType extends AbstractType
             ->add('search', TextType::class, [
                 'label' => false,
                 'attr' => [
-                    'placeholder' => 'Entrer votre recherche'
+                    'placeholder' => 'Rechercher'
                 ]
             ])
             ->add('recherche', SubmitType::class,[
