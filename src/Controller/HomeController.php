@@ -16,11 +16,14 @@ class HomeController extends AbstractController
     {
         $array_albums = [];
         $albums = $albumRepository->getDataAlbum();
-        $album_key = array_rand($albums, 2);
+        $album_key = array_rand($albums, 4);
         
         
         $array_albums[] = $albums[$album_key[0]] ;
         $array_albums[] = $albums[$album_key[1]] ;
+        $array_albums[] = $albums[$album_key[2]] ;
+        $array_albums[] = $albums[$album_key[3]] ;
+       
         
 
             //dd($array_albums);
