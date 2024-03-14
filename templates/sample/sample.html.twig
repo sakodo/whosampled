@@ -16,9 +16,11 @@
 					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
 						<h3>{{sample.songs[0].songname}}</h3>
 					</a>
-					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
-						<h4>{{sample.songs[0].artists}}</h4>
-					</a>
+					{% for artist in sample.songs[0].artists %}
+						<a href="{{ path('app_artist',{id: artist.id }) }}" class="text-decoration-none text-dark">
+							<h4>{{ artist.getArtistName() }}</h4>
+						</a>
+					{% endfor %}
 					<p>Sample appears at
 						<a href="#">0:23</a>
 						and
@@ -31,19 +33,17 @@
 			<div class="col-6">
 				<article class="original">
 					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 250px; height:250px;">
-					
-					<h3>{{ sample.samplesongorigin }}</h3>
-					</a>
-					<h4>{{ sample.sampleartistorigin }}</h4>
-					<p>Sample appears at
-						<a href="#">2:06</a>
-						and
-						<a href="#">2:04</a>
-					</p>
-					<audio controls src="/audio-whosampled/{{ sample.audiosamplefile }}"></audio>
-				</article>
-			</div>
-		</div>
-	</main>
 
-{% endblock %}
+					<h3>{{ sample.samplesongorigin }}</h3>
+				</a>
+				<h4>{{ sample.sampleartistorigin }}</h4>
+				<p>Sample appears at
+					<a href="#">2:06</a>
+					and
+					<a href="#">2:04</a>
+				</p>
+				<audio controls src="/audio-whosampled/{{ sample.audiosamplefile }}"></audio>
+			</article>
+		</div>
+	</div>
+</main>{% endblock %}
