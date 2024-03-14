@@ -5,7 +5,8 @@
 
 {% block body %}
 	<main class="flex-column">
-		<div class="row">
+		<h2 style="background-color: #f8f9fa;">Chanson VS Sample</h2>
+		<div class="row mt-5">
 			<div class="col-6">
 				<article class="sampleur">
 					{% for song in sample.songs %}
@@ -14,14 +15,14 @@
 						{% endfor %}
 					{% endfor %}
 					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
-						<h3>{{sample.songs[0].songname}}</h3>
+						<h3 class="mt-5">{{sample.songs[0].songname}}</h3>
 					</a>
 					{% for artist in sample.songs[0].artists %}
 						<a href="{{ path('app_artist',{id: artist.id }) }}" class="text-decoration-none text-dark">
-							<h4>{{ artist.getArtistName() }}</h4>
+							<h4 class="mt-1">{{ artist.getArtistName() }}</h4>
 						</a>
 					{% endfor %}
-					<p>Sample appears at
+					<p class="mb-3">Sample appears at
 						<a href="#">0:23</a>
 						and
 						<a href="#">2:25</a>
@@ -33,11 +34,10 @@
 			<div class="col-6">
 				<article class="original">
 					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 250px; height:250px;">
-
-					<h3>{{ sample.samplesongorigin }}</h3>
+					<h3 class="mt-5">{{ sample.samplesongorigin }}</h3>
 				</a>
-				<h4>{{ sample.sampleartistorigin }}</h4>
-				<p>Sample appears at
+				<h4 class="mt-1">{{ sample.sampleartistorigin }}</h4>
+				<p class="mb-3">Sample appears at
 					<a href="#">2:06</a>
 					and
 					<a href="#">2:04</a>
