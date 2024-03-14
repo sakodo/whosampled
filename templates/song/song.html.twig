@@ -9,7 +9,7 @@
     <h3>{{ song.songname }}</h3>
 
     {% for album in song.albums %}
-        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album" class="img-fluid" style="width: 200px; height: 200px;">
+        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album" class="img-fluid" style="width: 250px; height: 250px;">
     {% endfor %}  
      
    <figure>
@@ -21,8 +21,8 @@
     <h2 style="background-color: #f8f9fa;">Sample(s) utilisé(s) :</h2>
 {% for sample in song.samples %}
         <div class="d-flex align-items-center">
-            <img src="/img/{{ sample.samplecoverfile }}" alt="" class="img-fluid" style="width: 100px; height: 100px; padding: 10px;">
-            <p><a href="{{ path('app_sample', {id: sample.id}) }}">{{ sample.samplesongorigin }}</a></p>
+            <img src="/img/{{ sample.samplecoverfile }}" alt="" class="img-fluid" style="width: 150px; height: 150px; padding: 10px;">
+            <p><a href="{{ path('app_sample', {id: sample.id}) }}"  class=" text-decoration-none text-dark">{{ sample.samplesongorigin }}</a></p>
         </div>
  </div>
     {% endfor %}

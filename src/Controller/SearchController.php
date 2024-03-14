@@ -20,23 +20,21 @@ class SearchController extends AbstractController
 
         $artists = [];
         $songs   = [];
-        
+
         //verifie si il y a un envoi et si c'est valid
-        if($form->isSubmitted() && $form->isValid()) {  
-       
+        if ($form->isSubmitted() && $form->isValid()) {
             $query = $form->getData()['search'];
-            return $this->redirectToRoute('app_search', ['query' => $query]);           
-            
+            return $this->redirectToRoute('app_search', ['query' => $query]);
         }
         // Recupére la requête si elle pas vide dans une variable
-        if($searchTerm = $request->query->get('query')){  
-             // permet de verifier si la requête de la recherche est au bon format
-            if($this->verifyCaracter($searchTerm)){
+        if ($searchTerm = $request->query->get('query')) {
+            // permet de verifier si la requête de la recherche est au bon format
+            if ($this->verifyCaracter($searchTerm)) {
                 $artists = $artistRepository->findByName($searchTerm);
-                $songs   = $songRepository->findByName($searchTerm);      
-            }    
+                $songs   = $songRepository->findByName($searchTerm);
+            }
         }
-        
+
         return $this->render('search/search.html.twig', [
             'form'    => $form->createView(),
             'artists' => $artists,
@@ -51,7 +49,8 @@ class SearchController extends AbstractController
      * @param
      * @return return True si les caractères sont autorisés sinon redirige vers la app_search
      */
-    function verifyCaracter($query) {
+    function verifyCaracter($query)
+    {
         // Utilisation d'une expression régulière pour vérifier les caractères autorisés
         // La regex /^[a-zA-Z0-9' -]+$/ vérifie que la chaîne ne contient que des lettres minuscules, majuscules, chiffres, apostrophes et tirets.
         if (preg_match('/^[a-zA-Z0-9\' -]+$/', $query)) {
@@ -59,5 +58,5 @@ class SearchController extends AbstractController
         } else {
             return $this->redirectToRoute('app_search'); // La chaîne contient des caractères non autorisés
         }
-    }    
+    }
 }

@@ -7,46 +7,45 @@
         {# <!-----champ de recherche-----> #}
             {# {{form(form)}} #}
         {# <!-----champ de recherche-----> #}
-
-        <section class="">
-
-            <h3><strong>ARTISTES</strong></h3>
+         <h2 style="background-color: #f8f9fa;">Artiste</h2>
+            <div class='mt-5 mb-5'>
             {% if artists|length > 0 %}
                 <div class="artiste mb-5">
                     {% for artist in artists %}            
-                        <a href="/artist/{{ artist.id }}" class="d-flex flex-column align-items-start text-decoration-none text-dark">
-                            <img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="img-fluid" style="width: 100px; height: 100px;">
-                            <h4 class="text-center">{{ artist.artistName }}</h4>
+                        <a href="{{path('app_artist',{id: artist.id }) }}" class="d-flex flex-column align-items-start text-decoration-none text-dark">
+                            <img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="img-fluid" style="width: 200px; height: 200px;">
+                            <h3 class="text-center">{{ artist.artistName }}</h3>
                         </a>
                     {% endfor %}
                 </div>
             {% else %}
                 <p>Aucun artiste correspondant à la recherche</p>
             {% endif %}
-
-            <h3><strong>CHANSONS</strong></h3>
+            </div>
+            
+		<h2 style="background-color: #f8f9fa;">Morceaux </h2>
             {% if songs|length > 0 %}
                 {% for song in songs %}
-                    <div class="morceaux mb-5 col-6">
+                   <div class="harderbetter"> 
                         <a href="/song/{{ song.id }}" class="d-flex flex-row mt-4 text-decoration-none text-dark">
                             <div>
                                 {% if song.albums|length > 0 %} 
-                                    <img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="img-fluid" style="width: 100px; height: 100px;">
+                                    <img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="img-fluid" style="width: 150px; height: 150px;">
                                 {% endif %}
                             </div>
-                            <span class="flex-column">
-                                <h5 class="mb-0">{{ song.songname }}</h5>
+                            <div class="d-flex flex-column">
+                                <h3 class="mb-0">{{ song.songname }}</h3>
                                 {% if song.artists|length > 0 %} 
                                     <p>{{ song.artists[0].artistname }}</p>
                                 {% endif %}
-                            </span>
+                            </div>
                         </a>
                 {% endfor %}          
             {% else %}
                 <p>Aucune chanson correspondant à la recherche</p>
             {% endif %}
 
-        </section>
+        
     </main>
 
 {% endblock %}

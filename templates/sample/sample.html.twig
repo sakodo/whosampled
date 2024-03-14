@@ -10,13 +10,15 @@
 				<article class="sampleur">
 					{% for song in sample.songs %}
 						{% for artist in song.artists %}
-							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 200px; height:200px;" >
+							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 250px; height:250px;">
 						{% endfor %}
 					{% endfor %}
-					<h3>{{sample.songs[0].songname}}</h3>
-					{% for artist in sample.songs[0].artists %}
-						<h4>{{ artist.getArtistName() }}</h4>
-					{% endfor %}
+					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
+						<h3>{{sample.songs[0].songname}}</h3>
+					</a>
+					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
+						<h4>{{sample.songs[0].artists}}</h4>
+					</a>
 					<p>Sample appears at
 						<a href="#">0:23</a>
 						and
@@ -25,11 +27,13 @@
 					<audio controls src="/audio-whosampled/{{sample.songs[0].audiosongfile}}"></audio>
 				</article>
 			</div>
-			
+
 			<div class="col-6">
 				<article class="original">
-					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 200px; height:200px;">
+					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 250px; height:250px;">
+					
 					<h3>{{ sample.samplesongorigin }}</h3>
+					</a>
 					<h4>{{ sample.sampleartistorigin }}</h4>
 					<p>Sample appears at
 						<a href="#">2:06</a>

@@ -19,18 +19,18 @@ class SearchBarType extends AbstractType
                     'placeholder' => 'Rechercher'
                 ]
             ])
-            ->add('recherche', SubmitType::class,[
-                'attr' => [
-                    'class' => 'btn btn-primary'
-                ]
-            ])
+            //->add('recherche', SubmitType::class,[
+            //    'attr' => [
+            //        'class' => 'btn btn-primary'
+            //    ]
+            //])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            
         ]);
     }
 }

@@ -20,8 +20,8 @@
 						<div class="card-body">
 							<h5 class="card-title">INTERVIEW</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-																                        voluptates
-																                        quibusdam modi</p>
+																																                        voluptates
+																																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
@@ -31,8 +31,8 @@
 						<div class="card-body">
 							<h5 class="card-title">CHRONIQUE</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-																                        voluptates
-																                        quibusdam modi</p>
+																																                        voluptates
+																																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
@@ -42,8 +42,8 @@
 						<div class="card-body">
 							<h5 class="card-title">REVIEW</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-																                        voluptates
-																                        quibusdam modi</p>
+																																                        voluptates
+																																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
@@ -53,20 +53,22 @@
 
 			<div class='mt-5'>
 				<h2 style="background-color: #f8f9fa;">Samples de la semaine</h2>
-				<div class='row'>
+
+				<div class="d-flex flex-row flex-wrap">
 					{% for album in albums %}
-						<div class='col-3 mt-4'>
-							<article class='albums'>
-								<img src="/img/{{ album.imgcoverfile}}" alt="" class="img-fluid" style="width: 200px; height: 200px;">
-								<h4>{{ album.albumname}}</h4>
+						{% for artist in album.artists %}
+							<a href="{{path('app_artist',{id: artist.id }) }}" class="d-flex flex-column align-items-center m-2 mx-auto text-decoration-none text-dark">
+								<div>
+									<img src="/img/{{ album.imgcoverfile}}" alt="" class="img-fluid" style="width: 200px; height: 200px;">
+								</div>
+								<h5>{{ album.albumname}}</h5>
 								<p>{{ album.producer}}</p>
-							</article>
-						</div>
+							</a>
+						{% endfor %}
 					{% endfor %}
 				</div>
 			</div>
-		</div>
-	</main>
-{% endblock %}
+		</main>
+	{% endblock %}
 
-{% block javascripts %}{% endblock %}
+	{% block javascripts %}{% endblock %}

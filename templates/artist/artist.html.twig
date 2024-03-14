@@ -8,16 +8,16 @@
 		<h2 style="background-color: #f8f9fa;">Artiste</h2>
 		<div class='mt-5 mb-5'>
 			<section class="ficheartiste">
-				<img src="/img/{{artists.imgArtistFile}}" alt="photogroupe">
+				<img src="/img/{{artists.imgArtistFile}}" alt="photogroupe" class="img-fluid" style="width: 200px; height:200px">
 				<div class="presentation">
 					<h2>{{ artists.artistName }}</h2>
 					<h3>Dernier morceau:</h3>
 					<div class="latestrelease">
 						<img src="/img/ram-10th-anniversary-edition.jpg" alt="randomaccess">
 						<p>
-							<a href="#">Prime (2012 Unfinished)</a>
+							<a href="#"  class=" text-decoration-none text-dark">Prime (2012 Unfinished)</a>
 							(2023)
-							<br><a href="#">Random Access Memories (10th anniversary edition)</a>
+							<br><a href="#"  class=" text-decoration-none text-dark">Random Access Memories (10th anniversary edition)</a>
 						</p>
 					</div>
 				</div>
@@ -29,10 +29,11 @@
 			<section class="tracklist">
 				{% for song in songs %}
 					<div class="harderbetter">
+                    
 						<img src="/img/{{ song.albums[0].imgcoverfile}}" alt="harderbetter" class="img-fluid" style="width: 150px; height:150px">
 						<div class="d-flex flex-column">
                             <h3>
-                                <a href="/song/{{ song.id }}">{{ song.songname }}</a>
+                                 <a href="{{path('app_song' , { id: song.id })}}"  class=" text-decoration-none text-dark">{{ song.songname }}</a>
                             </h3>
                             <p>Année de sortie: {{ song.albums[0].releasedate|date('Y') }}</p>
                         </div>
