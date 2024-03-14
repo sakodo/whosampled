@@ -11,17 +11,17 @@
 		</div>
 
 		<div class='container'>
-			
-				<h2 style="background-color: #f8f9fa;">Actualités</h2>
-                <div class='mt-5'>
+
+			<h2 style="background-color: #f8f9fa;">Actualités</h2>
+			<div class='mt-5'>
 				<section class="editorial d-flex flex-row justify-content-between mb-5">
 					<div class="card col-3">
 						<img src="/img/card.jpg" class="card-img-top img-fluid" alt="image">
 						<div class="card-body">
 							<h5 class="card-title">INTERVIEW</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-								                        voluptates
-								                        quibusdam modi</p>
+																                        voluptates
+																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
@@ -31,8 +31,8 @@
 						<div class="card-body">
 							<h5 class="card-title">CHRONIQUE</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-								                        voluptates
-								                        quibusdam modi</p>
+																                        voluptates
+																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
@@ -42,34 +42,31 @@
 						<div class="card-body">
 							<h5 class="card-title">REVIEW</h5>
 							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
-								                        voluptates
-								                        quibusdam modi</p>
+																                        voluptates
+																                        quibusdam modi</p>
 							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
 						</div>
 					</div>
 
 				</section>
-            </div>
+			</div>
 
-				<div class='mt-5'>
-					<h2 style="background-color: #f8f9fa;">Sample de la semaine</h2>
-					<div class='row'>
-						{% for album in albums %}
-							<div class='col-3 mt-4'>
-								<article class='albums'>
-									<img src="/img/{{ album.imgcoverfile}}" alt="" class="img-fluid" style="width: 200px; height: 200px;">
-									<h4>{{ album.albumname}}</h4>
-									<p>{{ album.producer}}</p>
-								</article>
-							</div>
-						{% endfor %}
-					</div>
+			<div class='mt-5'>
+				<h2 style="background-color: #f8f9fa;">Samples de la semaine</h2>
+				<div class='row'>
+					{% for album in albums %}
+						<div class='col-3 mt-4'>
+							<article class='albums'>
+								<img src="/img/{{ album.imgcoverfile}}" alt="" class="img-fluid" style="width: 200px; height: 200px;">
+								<h4>{{ album.albumname}}</h4>
+								<p>{{ album.producer}}</p>
+							</article>
+						</div>
+					{% endfor %}
 				</div>
+			</div>
+		</div>
+	</main>
+{% endblock %}
 
-			
-
-        </div>
-		</main>
-	{% endblock %}
-
-	{% block javascripts %}{% endblock %}
+{% block javascripts %}{% endblock %}
