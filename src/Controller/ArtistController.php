@@ -14,8 +14,7 @@ class ArtistController extends AbstractController
     
     public function index(ArtistRepository $artistRepositrory, AlbumRepository $albumRepository, int $id): Response
     { 
-        $artist = $artists->findArtistWithSongsById($id);
-        $songs = $artist->getSongs();
+      
         //dd($songs);
         $artists = $artistRepositrory -> findArtistWithSongsById($id);
         $albums  = $albumRepository   -> getDataAlbum();
