@@ -4,11 +4,17 @@
 
 		<div class="navdroite">
 			{% if app.request.get('_route') != 'app_login' and app.request.get('_route') != 'app_register' %}
-				{{ form(form) }}{% endif %}
-				{# <form action="{{path('app_search')}}" method="POST">
-				             
-				                    <input type="search" placeholder="Rechercher">
-				                </form> #}
+				{{ form(form) }}
+			{% endif %}
+			{# <form action="{{path('app_search')}}" method="POST">
+				<input type="search" placeholder="Rechercher">
+			</form> #}
+			{% if app.user %}
+				<a href="{{ path('app_logout') }}" class="signin">
+					<img src="/images/logout.png" alt="logout">
+					<p>Déconnexion</p>
+				</a>
+			{% else %}
 				<a href="{{ path('app_login') }}" class="signin">
 					<img src="/images/profile.png" alt="signin">
 					<p>Connexion</p>
@@ -17,6 +23,7 @@
 					<img src="/images/inscription.png" alt="signin">
 					<p>Inscription</p>
 				</a>
-			</div>
-		</nav>
-	</header>
+			{% endif %}
+		</div>
+	</nav>
+</header>

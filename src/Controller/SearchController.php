@@ -44,10 +44,10 @@ class SearchController extends AbstractController
 
 
     /**
-     * Permet de verifier si la chaine est correct
+     * Permet de vérifier si la chaîne est correcte
      *
-     * @param
-     * @return return True si les caractères sont autorisés sinon redirige vers la app_search
+     * @param string $query La chaîne à vérifier
+     * @return bool|Response True si les caractères sont autorisés, sinon redirige vers la route 'app_search'
      */
     function verifyCaracter($query)
     {
@@ -56,7 +56,7 @@ class SearchController extends AbstractController
         if (preg_match('/^[a-zA-Z0-9\' -]+$/', $query)) {
             return true; // La chaîne ne contient que des caractères autorisés
         } else {
-            return $this->redirectToRoute('app_search'); // La chaîne contient des caractères non autorisés
+            return $this->redirectToRoute('app_search'); // La chaîne contient des caractères non autorisés, donc on redirige vers 'app_search'
         }
     }
 }

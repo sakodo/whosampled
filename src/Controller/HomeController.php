@@ -14,37 +14,32 @@ use Symfony\Component\Validator\Constraints\Length;
 
 class HomeController extends AbstractController
 {
-    // Définition de la route pour la page d'accueil
+    // Définition de la route pour cette méthode
     #[Route('/', name: 'app_home')]
-    public function index(AlbumRepository $albumRepository,Request $request ): Response
+    // Définition de la méthode index
+    public function index(AlbumRepository $albumRepository, Request $request): Response
     {
         // Création du formulaire de recherche
         $form = $this->createForm(SearchType::class);
+        // Gestion de la requête du formulaire
         $form->handleRequest($request);
-        
-        // Vérification si le formulaire a été soumis et est valide
-        if($form->isSubmitted() && $form->isValid()) {   
-       
-            // Récupération des données du formulaire
+
+        // Si le formulaire est soumis et valide
+        if ($form->isSubmitted() && $form->isValid()) {
+            // Récupération de la requête de recherche
             $query = $form->getData();
-            // Redirection vers la page de recherche avec les données du formulaire en paramètre
-            return $this->redirectToRoute('app_search', ['query' => $query]);           
-            
+            // Redirection vers la page de recherche avec la requête en paramètre
+            return $this->redirectToRoute('app_search', ['query' => $query]);
         }
 
-        // Initialisation du tableau qui contiendra les albums
-        $array_albums = [];
-        // Récupération des albums depuis la base de données
+        // Récupération de tous les albums
         $albums = $albumRepository->getDataAlbum();
-        // Sélection aléatoire de 4 clés du tableau des albums
-        $album_key = array_rand($albums, 4);
-        
-        // Ajout des albums correspondant aux clés sélectionnées dans le tableau des albums
-        $array_albums[] = $albums[$album_key[0]] ;
-        $array_albums[] = $albums[$album_key[1]] ;
-        $array_albums[] = $albums[$album_key[2]] ;
-        $array_albums[] = $albums[$album_key[3]] ;
-       
+        // Sélection aléatoire de 4 clés d'albums
+        $album_keys = array_rand($albums, 4);
+
+        // Utilisation de array_intersect_key pour obtenir les albums correspondant aux clés sélectionnées
+        $array_albums = array_intersect_key($albums, array_flip($album_keys));
+
         // Rendu de la vue avec les données nécessaires
         return $this->render('home/home.html.twig', [
             'form'            => $form->createView(),

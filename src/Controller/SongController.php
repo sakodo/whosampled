@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Form\SearchBarType;
+
 use App\Repository\SongRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SearchType;
@@ -13,27 +13,23 @@ use Symfony\Component\Routing\Annotation\Route;
 class SongController extends AbstractController
 {
     #[Route('/song/{id}', name: 'app_song')]
-    public function index(int $id, SongRepository $songRepository , Request $request): Response
+    public function index(int $id, SongRepository $songRepository, Request $request): Response
     {
+        // Création du formulaire de recherche
+        $form = $this->createForm(SearchType::class);
+        $form->handleRequest($request);
 
-         // Création du formulaire de recherche
-         $form = $this->createForm(SearchType::class);
-         $form->handleRequest($request);
-         
-         // Vérification si le formulaire a été soumis et est valide
-         if($form->isSubmitted() && $form->isValid()) {   
-        
-             // Récupération des données du formulaire
-             $query = $form->getData();
-             // Redirection vers la page de recherche avec les données du formulaire en paramètre
-             return $this->redirectToRoute('app_search', ['query' => $query]);           
-             
-         }
+        // Si le formulaire est soumis et valide, redirige vers la page de recherche
+        if ($form->isSubmitted() && $form->isValid()) {
+            $query = $form->getData();
+            return $this->redirectToRoute('app_search', ['query' => $query]);
+        }
+
+        // Récupération des informations de la chanson et des échantillons
         $song = $songRepository->findSongById($id);
         $samples = $songRepository->findSamplebySongId($id);
-        //dd($samples);
-        // $song = $songRepository->findOneBy(['id' => $id]);
-        //dd($song);
+
+        // Rendu de la vue avec les données nécessaires
         return $this->render('song/song.html.twig', [
             'form'            => $form->createView(),
             'controller_name' => 'SongController',
@@ -42,7 +38,7 @@ class SongController extends AbstractController
         ]);
     }
 
-      /**
+    /**
      * Permet de verifier si la chaine est correct
      *
      * @param
