@@ -1,19 +1,26 @@
+<!-- Début de l'en-tête -->
 <header>
+	<!-- Début de la barre de navigation -->
 	<nav class="container">
+		<!-- Logo du site -->
 		<img src="/images/logo.png" alt="logo">
 
 		<div class="navdroite">
+			<!-- Si la route actuelle n'est ni 'app_login' ni 'app_register', affiche le formulaire de recherche -->
 			{% if app.request.get('_route') != 'app_login' and app.request.get('_route') != 'app_register' %}
 				{{ form(form) }}
 			{% endif %}
+			<!-- Ancien formulaire de recherche commenté -->
 			{# <form action="{{path('app_search')}}" method="POST">
 				<input type="search" placeholder="Rechercher">
 			</form> #}
+			<!-- Si l'utilisateur est connecté, affiche le lien de déconnexion -->
 			{% if app.user %}
 				<a href="{{ path('app_logout') }}" class="signin">
 					<img src="/images/logout.png" alt="logout">
 					<p>Déconnexion</p>
 				</a>
+			<!-- Sinon, affiche les liens de connexion et d'inscription -->
 			{% else %}
 				<a href="{{ path('app_login') }}" class="signin">
 					<img src="/images/profile.png" alt="signin">
@@ -26,4 +33,6 @@
 			{% endif %}
 		</div>
 	</nav>
+	<!-- Fin de la barre de navigation -->
 </header>
+<!-- Fin de l'en-tête -->

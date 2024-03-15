@@ -8,17 +8,28 @@
 		<h2 style="background-color: #f8f9fa;">Chanson VS Sample</h2>
 		<div class="row mt-5">
 			<div class="col-6">
-				<article class="sampleur">
+				<article
+					class="sampleur">
+					<!-- Boucle sur chaque chanson dans l'échantillon -->
 					{% for song in sample.songs %}
+						<!-- Boucle sur chaque artiste de la chanson -->
 						{% for artist in song.artists %}
+							<!-- Affiche l'image de l'artiste -->
 							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 250px; height:250px;">
 						{% endfor %}
 					{% endfor %}
-					<a href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
+					<!-- Lien vers la page de la première chanson de l'échantillon -->
+					<a
+						href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
+						<!-- Affiche le nom de la première chanson de l'échantillon -->
 						<h3 class="mt-5">{{sample.songs[0].songname}}</h3>
 					</a>
+					<!-- Boucle sur chaque artiste de la première chanson de l'échantillon -->
 					{% for artist in sample.songs[0].artists %}
-						<a href="{{ path('app_artist',{id: artist.id }) }}" class="text-decoration-none text-dark">
+						<!-- Lien vers la page de l'artiste -->
+						<a
+							href="{{ path('app_artist',{id: artist.id }) }}" class="text-decoration-none text-dark">
+							<!-- Affiche le nom de l'artiste -->
 							<h4 class="mt-1">{{ artist.getArtistName() }}</h4>
 						</a>
 					{% endfor %}

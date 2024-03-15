@@ -1,30 +1,39 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Chanson{% endblock %}
+{% block title %}Chanson
+{% endblock %}
 
 {% block body %}
-<main class="flex-column">
- <div class='mt-5'>
-<h2 style="background-color: #f8f9fa;">Chanson :</h2>
-    <h3>{{ song.songname }}</h3>
-
-    {% for album in song.albums %}
-        <img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album" class="img-fluid" style="width: 250px; height: 250px;">
-    {% endfor %}  
-     
-   <figure>
-        <figcaption>Ecouter la chanson :</figcaption>
-        <audio controls src="/audio-whosampled/{{song.audiosongfile}}"></audio>
-    </figure>
- </div>  
- <div class='mt-5'>
-    <h2 style="background-color: #f8f9fa;">Sample(s) utilisé(s) :</h2>
-{% for sample in song.samples %}
-        <div class="d-flex align-items-center">
-            <img src="/img/{{ sample.samplecoverfile }}" alt="" class="img-fluid" style="width: 150px; height: 150px; padding: 10px;">
-            <p><a href="{{ path('app_sample', {id: sample.id}) }}"  class=" text-decoration-none text-dark">{{ sample.samplesongorigin }}</a></p>
-        </div>
- </div>
-    {% endfor %}
-    </main>
+	<main class="flex-column">
+		<div class='mt-5'>
+			<h2 style="background-color: #f8f9fa;">Chanson :</h2>
+			<h3>{{ song.songname }}</h3>
+			<!-- Boucle sur chaque album de la chanson -->
+			{% for album in song.albums %}
+				<!-- Affiche l'image de l'album -->
+				<img src="/img/{{ album.imgcoverfile }}" alt="Image de l'album" class="img-fluid" style="width: 250px; height: 250px;">
+			{% endfor %}
+			<figure>
+				<figcaption>Ecouter la chanson :</figcaption>
+				<audio controls src="/audio-whosampled/{{song.audiosongfile}}"></audio>
+			</figure>
+		</div>
+		<div class='mt-5'>
+			<h2 style="background-color: #f8f9fa;">Sample(s) utilisé(s) :</h2>
+			<!-- Boucle sur chaque échantillon de la chanson -->
+			{% for sample in song.samples %}
+				<!-- Conteneur pour l'échantillon -->
+				<div
+					class="d-flex align-items-center">
+					<!-- Affiche l'image de l'échantillon -->
+					<img
+					src="/img/{{ sample.samplecoverfile }}" alt="" class="img-fluid" style="width: 150px; height: 150px; padding: 10px;">
+					<!-- Lien vers la page de l'échantillon avec le nom de la chanson originale de l'échantillon -->
+					<p>
+						<a href="{{ path('app_sample', {id: sample.id}) }}" class=" text-decoration-none text-dark">{{ sample.samplesongorigin }}</a>
+					</p>
+				</div>
+			</div>
+		{% endfor %}
+	</main>
 {% endblock %}

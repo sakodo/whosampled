@@ -24,11 +24,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 
     private UrlGeneratorInterface $urlGenerator;
 
+    // Constructeur de la classe
     public function __construct(UrlGeneratorInterface $urlGenerator)
     {
         $this->urlGenerator = $urlGenerator;
     }
 
+    // Méthode pour authentifier l'utilisateur
     public function authenticate(Request $request): Passport
     {
         $email = $request->request->get('email', '');
@@ -45,16 +47,18 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
         );
     }
 
+    // Méthode appelée en cas de succès de l'authentification
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // For example:
-    return new RedirectResponse($this->urlGenerator->generate('app_home'));
+        // Redirige vers la page d'accueil en cas de succès
+        return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
+    // Méthode pour obtenir l'URL de connexion
     protected function getLoginUrl(Request $request): string
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);

@@ -29,9 +29,9 @@ class Plateform
         $this->songs = new ArrayCollection();
     }
 
-  
 
-  
+
+
 
     public function getId(): ?int
     {
@@ -85,6 +85,4 @@ class Plateform
 
         return $this;
     }
-
- 
 }

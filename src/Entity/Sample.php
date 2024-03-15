@@ -18,7 +18,7 @@ class Sample
     #[ORM\Column(length: 255)]
     private ?string $audio_sample_file = null;
 
- 
+
 
     #[ORM\ManyToMany(targetEntity: Song::class, inversedBy: 'samples')]
     private Collection $songs;
@@ -59,7 +59,7 @@ class Sample
         return $this;
     }
 
-   
+
 
     /**
      * @return Collection<int, Song>
@@ -132,7 +132,4 @@ class Sample
 
         return $this;
     }
-
-
-   
 }

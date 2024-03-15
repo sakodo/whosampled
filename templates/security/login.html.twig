@@ -1,13 +1,19 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
+{% block title %}Login!
 {% endblock %}
 
 {% block body %}
 	<main class="flex-column">
 		<form method="post">
 			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				<!-- Affiche un message d'erreur dans une alerte -->
+				<div
+					class="alert alert-danger">
+					<!-- Traduit le message d'erreur en utilisant le domaine de traduction 'security' -->
+					{{ error.messageKey|trans(error.messageData, 'security') }}
+				</div>
+				<!-- Fin de la vérification d'erreur -->
 			{% endif %}
 			<div class="w-4/5 m-auto text-center">
 				<div class="py-12 border-b border-gray-200">
@@ -22,15 +28,15 @@
 						<label for="inputPassword" class="visually-hidden">Mot de passe</label>
 						<input type="password" name="password" class="form-control" id="inputPassword" placeholder="Mot de passe" required>
 					</div>
-
-					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-					<div class='d-flex justify-content-center'>
+					<!-- Champ caché pour le jeton CSRF -->
+					<!-- Le jeton CSRF est utilisé pour protéger contre les attaques de type Cross-Site Request Forgery -->
+					<!-- 'authenticate' est l'ID utilisé pour générer le jeton CSRF -->
+					<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"> <div class='d-flex justify-content-center'>
 						<button type="submit" class="btn btn-primary">Connexion</button>
 					</div>
 
 				</div>
 			</form>
 		</div>
-    </main>
+	</main>
 {% endblock %}
