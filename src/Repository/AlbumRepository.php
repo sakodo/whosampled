@@ -20,8 +20,9 @@ class AlbumRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Album::class);
     }
-    public function getDataAlbum() : array{
-       
+    public function getDataAlbum(): array
+    {
+
         return $this->findAll();
     }
     //    /**

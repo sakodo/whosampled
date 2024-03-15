@@ -16,57 +16,45 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class ArtistRepository extends ServiceEntityRepository
 {
+    // Constructeur de la classe
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Artist::class);
     }
 
+    // Recherche des artistes par nom
     public function findByName(string $query): array
-        {
-            return $this->createQueryBuilder('a')
-                        ->andWhere('a.artist_name LIKE :val')
-                        ->setParameter('val', '%'.$query.'%')
-                        ->orderBy('a.artist_name', 'ASC')
-                        ->orderBy('a.img_artist_file')
-                        ->getQuery()
-                        ->getResult()
-            ;
-        }
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.artist_name LIKE :val')
+            ->setParameter('val', '%' . $query . '%')
+            ->orderBy('a.artist_name', 'ASC')
+            ->orderBy('a.img_artist_file')
+            ->getQuery()
+            ->getResult();
+    }
 
+    // Recherche d'un artiste avec ses chansons par ID
     public function findArtistWithSongsById(string $id): ?Artist
-       {
-           return $this->createQueryBuilder('a')
-               ->leftJoin('a.songs', 's') 
-               ->addSelect('s') 
-               ->andWhere('a.id = :id')
-               ->setParameter('id', $id)
-               ->getQuery()
-               ->getOneOrNullResult();
-       }
+    {
+        return $this->createQueryBuilder('a')
+            ->leftJoin('a.songs', 's') // Jointure avec la table des chansons
+            ->addSelect('s') // Sélection des chansons
+            ->andWhere('a.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 
-
-    //    /**
-    //     * @return Artist[] Returns an array of Artist objects
-    //     */
-    //    public function findByExampleField(string $query): array
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', '%'.$value.'%')
-    //            ->orderBy('a.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
-
-    //    public function findOneBySomeField($value): ?Artist
-    //    {
-    //        return $this->createQueryBuilder('a')
-    //            ->andWhere('a.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+    // Cette méthode est commentée, vous pouvez la décommenter si nécessaire
+    // public function findByExampleField(string $query): array
+    // {
+    //     return $this->createQueryBuilder('a')
+    //         ->andWhere('a.exampleField = :val')
+    //         ->setParameter('val', '%'.$value.'%')
+    //         ->orderBy('a.id', 'ASC')
+    //         ->setMaxResults(10)
+    //         ->getQuery()
+    //         ->getResult();
+    // }
 }
