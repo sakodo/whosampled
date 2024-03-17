@@ -4,33 +4,57 @@
 {% endblock %}
 
 {% block body %}
+	<main class="flex-column">
+		<h2 style="background-color: #f8f9fa;">Chanson VS Sample</h2>
+		<div class="row mt-5">
+			<div class="col-6">
+				<article
+					class="sampleur">
+					<!-- Boucle sur chaque chanson dans l'échantillon -->
+					{% for song in sample.songs %}
+						<!-- Boucle sur chaque artiste de la chanson -->
+						{% for artist in song.artists %}
+							<!-- Affiche l'image de l'artiste -->
+							<img src="/img/{{artist.getImgArtistFile()}}" alt="" class="img-fluid" style="width: 250px; height:250px;">
+						{% endfor %}
+					{% endfor %}
+					<!-- Lien vers la page de la première chanson de l'échantillon -->
+					<a
+						href="{{ path('app_song', {id: sample.songs[0].id}) }}" class=" text-decoration-none text-dark">
+						<!-- Affiche le nom de la première chanson de l'échantillon -->
+						<h3 class="mt-5">{{sample.songs[0].songname}}</h3>
+					</a>
+					<!-- Boucle sur chaque artiste de la première chanson de l'échantillon -->
+					{% for artist in sample.songs[0].artists %}
+						<!-- Lien vers la page de l'artiste -->
+						<a
+							href="{{ path('app_artist',{id: artist.id }) }}" class="text-decoration-none text-dark">
+							<!-- Affiche le nom de l'artiste -->
+							<h4 class="mt-1">{{ artist.getArtistName() }}</h4>
+						</a>
+					{% endfor %}
+					<p class="mb-3">Sample appears at
+						<a href="#">0:23</a>
+						and
+						<a href="#">2:25</a>
+						(and throughout)</p>
+					<audio controls src="/audio-whosampled/{{sample.songs[0].audiosongfile}}"></audio>
+				</article>
+			</div>
 
-	<div class="row">
-		<div class="col-6">
-			<p><img src="/img/{{sample.samplecoverfile}}" alt=""></p>
-			<h5>{{ sample.samplesongorigin }}</h5>
-			<p>{{ sample.sampleartistorigin }}</p>
-			<figure>
-				
+			<div class="col-6">
+				<article class="original">
+					<img src="/img/{{sample.samplecoverfile}}" alt="discoverycover" class="img-fluid" style="width: 250px; height:250px;">
+					<h3 class="mt-5">{{ sample.samplesongorigin }}</h3>
+				</a>
+				<h4 class="mt-1">{{ sample.sampleartistorigin }}</h4>
+				<p class="mb-3">Sample appears at
+					<a href="#">2:06</a>
+					and
+					<a href="#">2:04</a>
+				</p>
 				<audio controls src="/audio-whosampled/{{ sample.audiosamplefile }}"></audio>
-			</figure>
+			</article>
 		</div>
-
-		<div class="col-6">
-			{% for song in sample.songs %}
-				{% for artist in song.artists %}
-					<img src="/img/{{artist.getImgArtistFile()}}" alt="">
-				{% endfor %}
-			{% endfor %}
-			<h5>{{sample.songs[0].songname}}</h5>
-			{% for artist in sample.songs[0].artists %}
-				<p>{{ artist.getArtistName() }}</p>
-			{% endfor %}
-			<figure>
-				
-				<audio controls src="/audio-whosampled/{{sample.songs[0].audiosongfile}}"></audio>
-			</figure>
-		</div>
-</div>
-
-{% endblock %}
+	</div>
+</main>{% endblock %}

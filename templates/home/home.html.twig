@@ -1,0 +1,80 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+	<main class="flex-column">
+
+		<div class='mt-1 mb-5'>
+			<div class='d-flex justify-content-center'>
+				<img src="{{ asset('img/LOGO.png')}}" alt="" style='height: 200px;'>
+			</div>
+		</div>
+
+		<div class='container'>
+
+			<h2 style="background-color: #f8f9fa;">Actualités</h2>
+			<div class='mt-5'>
+				<section class="editorial d-flex flex-row justify-content-between mb-5">
+					<div class="card col-3">
+						<img src="/img/card.jpg" class="card-img-top img-fluid" alt="image">
+						<div class="card-body">
+							<h5 class="card-title">INTERVIEW</h5>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
+																																								                        voluptates
+																																								                        quibusdam modi</p>
+							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
+						</div>
+					</div>
+
+					<div class="card col-3">
+						<img src="/img/card.jpg" class="card-img-top img-fluid" alt="image">
+						<div class="card-body">
+							<h5 class="card-title">CHRONIQUE</h5>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
+																																								                        voluptates
+																																								                        quibusdam modi</p>
+							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
+						</div>
+					</div>
+
+					<div class="card col-3">
+						<img src="/img/card.jpg" class="card-img-top img-fluid" alt="image">
+						<div class="card-body">
+							<h5 class="card-title">REVIEW</h5>
+							<p class="card-text mb-2">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto
+																																								                        voluptates
+																																								                        quibusdam modi</p>
+							<a href="#" class="btn btn-secondary btn-sm">Lire</a>
+						</div>
+					</div>
+
+				</section>
+			</div>
+
+			<div class='mt-5'>
+				<h2 style="background-color: #f8f9fa;">Samples de la semaine</h2>
+				<div
+					class="d-flex flex-row flex-wrap">
+					<!-- Boucle sur chaque album -->
+					{% for album in albums %}
+						<!-- Boucle sur chaque artiste de l'album -->
+						{% for artist in album.artists %}
+							<!-- Lien vers la page de l'artiste, avec l'image de l'album, le nom de l'album et le producteur -->
+							<a href="{{path('app_artist',{id: artist.id }) }}" class="d-flex flex-column align-items-center m-2 mx-auto text-decoration-none text-dark">
+								<div>
+									<!-- Image de l'album -->
+									<img src="/img/{{ album.imgcoverfile}}" alt="" class="img-fluid" style="width: 200px; height: 200px;">
+								</div>
+								<!-- Nom de l'album -->
+								<h5>{{ album.albumname}}</h5>
+								<!-- Producteur de l'album -->
+								<p>{{ album.producer}}</p>
+							</a>
+						{% endfor %}
+					{% endfor %}
+				</div>
+			</div>
+		</main>
+	{% endblock %}
+
+	{% block javascripts %}{% endblock %}

@@ -1,32 +1,38 @@
+<!-- Début de l'en-tête -->
 <header>
-	<div class="container2">
-		<img src="/img/logo.png" alt="logo">
+	<!-- Début de la barre de navigation -->
+	<nav class="container">
+		<!-- Logo du site -->
+		<img src="/images/logo.png" alt="logo">
 
 		<div class="navdroite">
-			<input id='register' type="text" placeholder="Rechercher">
-
-			<a href="#" class="iconefav">
-				<img src="/img/favoris.png" alt="iconefav">
-				<p>Favoris</p>
-			</a>
-			<a href="#" class="librairies">
-				<img src="/img/library.png" alt="iconelib">
-				<p>Librairies</p>
-			</a>
-
+			<!-- Si la route actuelle n'est ni 'app_login' ni 'app_register', affiche le formulaire de recherche -->
+			{% if app.request.get('_route') != 'app_login' and app.request.get('_route') != 'app_register' %}
+				{{ form(form) }}
+			{% endif %}
+			<!-- Ancien formulaire de recherche commenté -->
+			{# <form action="{{path('app_search')}}" method="POST">
+				<input type="search" placeholder="Rechercher">
+			</form> #}
+			<!-- Si l'utilisateur est connecté, affiche le lien de déconnexion -->
 			{% if app.user %}
-				<a href="{{ path('app_logout') }}">Se déconnecter</a>
-            {% else %}
-				<a href="register" class="register">
-					<p>S'inscrire</p>
+				<a href="{{ path('app_logout') }}" class="signin">
+					<img src="/images/logout.png" alt="logout">
+					<p>Déconnexion</p>
 				</a>
-				<a href="login" class="signin">
-					<img src="/img/profile.png" alt="signin">
-					<p>Se connecter</p>
+			<!-- Sinon, affiche les liens de connexion et d'inscription -->
+			{% else %}
+				<a href="{{ path('app_login') }}" class="signin">
+					<img src="/images/profile.png" alt="signin">
+					<p>Connexion</p>
 				</a>
-            {% endif %}
-
-
+				<a href="{{ path('app_register') }}" class="signin">
+					<img src="/images/inscription.png" alt="signin">
+					<p>Inscription</p>
+				</a>
+			{% endif %}
 		</div>
-	</div>
+	</nav>
+	<!-- Fin de la barre de navigation -->
 </header>
+<!-- Fin de l'en-tête -->

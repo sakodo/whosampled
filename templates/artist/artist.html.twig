@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}artist
+{% endblock %}
+
+{% block body %}
+	<!-- Début du contenu principal -->
+	<main
+		class="flex-column">
+		<!-- Titre de la section artiste -->
+		<h2 style="background-color: #f8f9fa;">Artiste</h2>
+		<div class='mt-5 mb-5'>
+			<section
+				class="ficheartiste">
+				<!-- Image de l'artiste -->
+				<img src="/img/{{artists.imgArtistFile}}" alt="photogroupe" class="img-fluid" style="width: 200px; height:200px">
+				<div
+					class="presentation">
+					<!-- Nom de l'artiste -->
+					<h2>{{ artists.artistName }}</h2>
+					<h3>Dernier morceau:</h3>
+					<div
+						class="latestrelease">
+						<!-- Image et détails du dernier morceau -->
+						<img src="/img/ram-10th-anniversary-edition.jpg" alt="randomaccess">
+						<p>
+							<a href="#" class=" text-decoration-none text-dark">Prime (2012 Unfinished)</a>
+							(2023)
+							<br><a href="#" class=" text-decoration-none text-dark">Random Access Memories (10th anniversary edition)</a>
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Titre de la section des morceaux -->
+		<h2 style="background-color: #f8f9fa;">Morceaux
+		</h2>
+		<div class='mt-5'>
+			<section
+				class="tracklist">
+				<!-- Boucle sur les morceaux -->
+				{% for song in songs %}
+					<div
+						class="harderbetter">
+						<!-- Image du morceau -->
+						<img src="/img/{{ song.albums[0].imgcoverfile}}" alt="harderbetter" class="img-fluid" style="width: 150px; height:150px">
+						<div
+							class="d-flex flex-column">
+							<!-- Nom du morceau et année de sortie -->
+							<h3>
+								<a href="{{path('app_song' , { id: song.id })}}" class=" text-decoration-none text-dark">{{ song.songname }}</a>
+							</h3>
+							<p>Année de sortie:
+								{{ song.albums[0].releasedate|date('Y') }}</p>
+						</div>
+					</div>
+				{% endfor %}
+			</section>
+		</div>
+	</main>
+	<!-- Fin du contenu principal -->
+{% endblock %}

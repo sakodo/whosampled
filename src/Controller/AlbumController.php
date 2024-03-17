@@ -6,13 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class ResultController extends AbstractController
+class AlbumController extends AbstractController
 {
-    #[Route('/result', name: 'app_result')]
+    #[Route('/album', name: 'app_album')]
     public function index(): Response
     {
-        return $this->render('result/index.html.twig', [
-            'controller_name' => 'ResultController',
+        return $this->render('album/album.html.twig', [
+            'controller_name' => 'AlbumController',
         ]);
     }
 }

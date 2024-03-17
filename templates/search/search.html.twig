@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Resultats de la recherche
+{% endblock %}
+
+{% block body %}
+	<!-- Début du contenu principal -->
+	<main
+		class="flex-column">
+		<!-- Titre de la section Artiste -->
+		<h2 style="background-color: #f8f9fa;">Artiste</h2>
+		<div
+			class='mt-5 mb-5'>
+			<!-- Si des artistes correspondent à la recherche -->
+			{% if artists|length > 0 %}
+				<div
+					class="artiste mb-5">
+					<!-- Boucle sur chaque artiste -->
+					{% for artist in artists %}
+						<!-- Lien vers la page de l'artiste avec son image et son nom -->
+						<a href="{{path('app_artist',{id: artist.id }) }}" class="d-flex flex-column align-items-start text-decoration-none text-dark">
+							<img src="/img/{{ artist.imgArtistFile }}" alt="photoartiste" class="img-fluid" style="width: 200px; height: 200px;">
+							<h3 class="text-center">{{ artist.artistName }}</h3>
+						</a>
+					{% endfor %}
+				</div>
+				<!-- Si aucun artiste ne correspond à la recherche -->
+			{% else %}
+				<p>Aucun artiste correspondant à la recherche</p>
+			{% endif %}
+		</div>
+
+		<!-- Titre de la section Morceaux -->
+		<h2 style="background-color: #f8f9fa;">Morceaux
+		</h2>
+		<!-- Si des morceaux correspondent à la recherche -->
+		{% if songs|length > 0 %}
+			<!-- Boucle sur chaque morceau -->
+			{% for song in songs %}
+				<div
+					class="harderbetter">
+					<!-- Lien vers la page du morceau avec son image, son nom et l'artiste -->
+					<a href="/song/{{ song.id }}" class="d-flex flex-row mt-4 text-decoration-none text-dark">
+						<div>
+							<!-- Si le morceau a un album, affiche l'image de l'album -->
+							{% if song.albums|length > 0 %}
+								<img src="/img/{{ song.albums[0].imgcoverfile }}" alt="pochette2" class="img-fluid" style="width: 150px; height: 150px;">
+							{% endif %}
+						</div>
+						<div
+							class="d-flex flex-column">
+							<!-- Nom du morceau -->
+							<h3 class="mb-0">{{ song.songname }}</h3>
+							<!-- Si le morceau a un artiste, affiche le nom de l'artiste -->
+							{% if song.artists|length > 0 %}
+								<p>{{ song.artists[0].artistname }}</p>
+							{% endif %}
+						</div>
+					</a>
+				{% endfor %}
+				<!-- Si aucun morceau ne correspond à la recherche -->
+			{% else %}
+				<p>Aucune chanson correspondant à la recherche</p>
+			{% endif %}
+		</main>
+		<!-- Fin du contenu principal -->
+	{% endblock %}
