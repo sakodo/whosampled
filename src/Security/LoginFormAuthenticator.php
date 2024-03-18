@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+// Importation des classes nécessaires
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,12 +17,16 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\SecurityRequestAttributes;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
 
+// Définition de la classe LoginFormAuthenticator qui étend AbstractLoginFormAuthenticator
 class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
 {
+    // Utilisation du trait TargetPathTrait
     use TargetPathTrait;
 
+    // Constante pour la route de connexion
     public const LOGIN_ROUTE = 'app_login';
 
+    // Propriété pour le générateur d'URL
     private UrlGeneratorInterface $urlGenerator;
 
     // Constructeur de la classe
@@ -33,10 +38,13 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     // Méthode pour authentifier l'utilisateur
     public function authenticate(Request $request): Passport
     {
+        // Récupération de l'email de l'utilisateur
         $email = $request->request->get('email', '');
 
+        // Stockage du dernier nom d'utilisateur utilisé
         $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
 
+        // Création et retour d'un nouveau Passport pour l'utilisateur
         return new Passport(
             new UserBadge($email),
             new PasswordCredentials($request->request->get('password', '')),
@@ -50,17 +58,19 @@ class LoginFormAuthenticator extends AbstractLoginFormAuthenticator
     // Méthode appelée en cas de succès de l'authentification
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
+        // Si un chemin cible est défini, redirige vers ce chemin
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
 
-        // Redirige vers la page d'accueil en cas de succès
+        // Sinon, redirige vers la page d'accueil
         return new RedirectResponse($this->urlGenerator->generate('app_home'));
     }
 
     // Méthode pour obtenir l'URL de connexion
     protected function getLoginUrl(Request $request): string
     {
+        // Génère et retourne l'URL de la route de connexion
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 }
